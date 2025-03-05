@@ -33,14 +33,12 @@ exports.updateUser = async (req, res) => {
       { name: name, surname: surname },
       { new: true }
     );
-    res
-      .status(200)
-      .json({
-        error: false,
-        succes: true,
-        message: "Güncelleme başarılı",
-        data: updatedUser,
-      });
+    res.status(200).json({
+      error: false,
+      succes: true,
+      message: "Güncelleme başarılı",
+      data: updatedUser,
+    });
   } catch (error) {
     res
       .status(500)
@@ -51,14 +49,12 @@ exports.getUserById = async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await User.findById(userId);
-    res
-      .status(200)
-      .json({
-        error: false,
-        succes: true,
-        message: "Kullanıcı listelendi",
-        data: user,
-      });
+    res.status(200).json({
+      error: false,
+      succes: true,
+      message: "Kullanıcı listelendi",
+      data: user,
+    });
   } catch (error) {
     res
       .status(500)
@@ -68,14 +64,12 @@ exports.getUserById = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res
-      .status(200)
-      .json({
-        error: false,
-        succes: true,
-        message: "Kullanıcılar listelendi",
-        data: users,
-      });
+    res.status(200).json({
+      error: false,
+      succes: true,
+      message: "Kullanıcılar listelendi",
+      data: users,
+    });
   } catch (error) {
     res
       .status(500)
@@ -85,7 +79,7 @@ exports.getAllUsers = async (req, res) => {
 exports.deleteUserById = async (req, res) => {
   try {
     const { userId } = req.params;
-    await User.findByIdAndUpdate(userId);
+    await User.findByIdAndDelete(userId);
     res
       .status(200)
       .json({ error: false, succes: true, message: "Kullanıcı silindi" });
@@ -105,14 +99,12 @@ exports.updatePassword = async (req, res) => {
       { password: _password },
       { new: true }
     );
-    res
-      .status(200)
-      .json({
-        error: false,
-        succes: true,
-        message: "Güncelleme Başarılı",
-        data: updatedUser,
-      });
+    res.status(200).json({
+      error: false,
+      succes: true,
+      message: "Güncelleme Başarılı",
+      data: updatedUser,
+    });
   } catch (error) {
     res
       .status(500)

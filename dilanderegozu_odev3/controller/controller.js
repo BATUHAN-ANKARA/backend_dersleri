@@ -79,7 +79,7 @@ exports.getAllUsers = async (req, res) => {
 exports.deleteUserById = async (req, res) => {
   try {
     const { userId } = req.params;
-    await User.findByIdAndUpdate(userId);
+    await User.findByIdAndDelete(userId);
     res
       .status(200)
       .json({ error: false, succes: true, message: "Kullanıcı silindi" });
