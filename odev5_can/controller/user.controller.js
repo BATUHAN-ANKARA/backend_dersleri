@@ -41,42 +41,74 @@ exports.register = async (req, res) => {
   }
 };
 
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const _password = utils.hasToPassword(password);
+    const user = await User.find({ email: email, password: _password });
+    if (user.length > 0) {
+      res.status(StatusCodes.OK).json({
+        ...baseResponse,
+        code: StatusCodes.OK,
+        data: user,
+        message: "Giriş Başarılı",
+        timestamp: new Date(),
+      });
+    }
+    throw new Error("Email veya şifre hatalı");
+  } catch (error) {
+    res
+      .json({
+        ...baseResponse,
+        error: true,
+        succes: false,
+        timestamp: new Date(),
+        code: StatusCodes.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      })
+      .status(StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+};
+
 exports.notHesapla = async (req, res) => {
   try {
-    const { name, surname, vizeNotu, finalNotu } = req.body;
+    const { vizeNotu, finalNotu } = req.body;
+    const { userId } = req.params;
+
+    let ortalama = vizeNotu * 0.4 + finalNotu * 0.6;
+
+    let {harfNotu,isPassed} = utils.harfNotuHesapla(finalNotu,ortalama)
+    
+    const user = await User.findById(userId);
+
+    if (user.length > !0) {
+      throw new Error("Kullanıcı bulunamadı!");
+    }
+
     if (typeof vizeNotu !== "number" || typeof finalNotu !== "number") {
       throw new Error("Lütfen sayı tipinde bir veri giriniz!");
     }
-    const ortalama = vizeNotu * 0.4 + finalNotu * 0.6;
-    const harfNotuHesapla = (ortalama) => {
-      return ortalama >= 90
-        ? "AA"
-        : ortalama >= 80
-        ? "BA"
-        : ortalama >= 70
-        ? "BB"
-        : ortalama >= 60
-        ? "CB"
-        : ortalama >= 50
-        ? "CC"
-        : "FF";
-    };
-    const harfNotu = harfNotuHesapla(ortalama);
-    const isPassed = harfNotu !== "FF";
-    const user = new User({
-      name,
-      surname,
-      vizeNotu,
-      finalNotu,
-    });
-    //await user.save();
+    if (vizeNotu < 0 || vizeNotu > 100 || finalNotu < 0 || finalNotu > 100) {
+      throw new Error("0-100 aralığında not girişi yapın");
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        vizeNotu: vizeNotu,
+        finalNotu: finalNotu,
+        harfNotu: harfNotu,
+        isPassed: isPassed,
+      },
+      {
+        new: true,
+      }
+    );
     res.json({
       ...baseResponse,
       code: StatusCodes.OK,
       timestamp: new Date(),
-      data: user,
-      harfNotu: harfNotu,
-      isPassed: isPassed,
+      data: updatedUser,
       message: isPassed ? "Dersi geçtiniz" : "Dersi geçemediniz!",
     });
   } catch (error) {
@@ -93,10 +125,3 @@ exports.notHesapla = async (req, res) => {
   }
 };
 
-/*
-rotanın adı harf notu hesapla (not-hesapla)-post isteği
-vizenin %40ı finalin %60ı 
-ortalamasına göre harf notunu verin
-res.json içerisinde message alanına geçip geçmeme durumunu da bildirin
-isPAssed alanını da duruma göre güncelleyin
-*/

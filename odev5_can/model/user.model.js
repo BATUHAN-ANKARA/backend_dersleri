@@ -28,7 +28,7 @@ const userSchema = new Schema(
       type: Number,
     },
     harfNotu: {
-      type: Number,
+      type: String,
     },
     isPassed: {
       type: Boolean,
