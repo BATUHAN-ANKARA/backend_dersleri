@@ -15,7 +15,40 @@ const harfNotuHesapla = (finalNotu,ortalama) =>{
         : { harfNotu: "FF", isPassed: false };
 }
 
+const burcHesap =(day,month) => {
+   switch (month) {
+    case 1: return day <= 19 ? "Oğlak" : "Kova";
+    break;
+    case 2: return day <= 18 ? "Kova" : "Balık";
+    break;
+    case 3: return day <= 20 ? "Balık" : "Koç";
+    break;
+    case 4: return day <= 19 ? "Koç" : "Boğa";
+    break;
+    case 5: return day <= 20 ? "Boğa" : "İkizler";
+    break;
+    case 6: return day <= 20 ? "İkizler" : "Yengeç";
+    break;
+    case 7: return day <= 22 ? "Yengeç" : "Aslan";
+    break;
+    case 8: return day <= 22 ? "Aslan" : "Başak";
+    break;
+    case 9: return day <= 22 ? "Başak" : "Terazi";
+    break;
+    case 10: return day <= 22 ? "Terazi" : "Akrep";
+    break;
+    case 11: return day <= 21 ? "Akrep" : "Yay";
+    break;
+    case 12: return day <= 21 ? "Yay" : "Oğlak";
+    break;
+
+    default: return "Geçersiz Tarih";
+      break;
+  }
+}
+
 module.exports = {
   harfNotuHesapla,
   hasToPassword,
+  burcHesap,
 }

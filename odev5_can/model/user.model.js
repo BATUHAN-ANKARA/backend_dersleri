@@ -33,6 +33,12 @@ const userSchema = new Schema(
     isPassed: {
       type: Boolean,
     },
+    birthDate: {
+      type: Date,
+    },
+    zodiacSign: {
+      type: String,
+    },
   },
   {
     timestamps: true,

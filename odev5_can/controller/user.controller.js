@@ -81,7 +81,7 @@ exports.notHesapla = async (req, res) => {
     
     const user = await User.findById(userId);
 
-    if (user.length > !0) {
+    if (!user || user.length === 0) {
       throw new Error("Kullanıcı bulunamadı!");
     }
 
@@ -125,3 +125,36 @@ exports.notHesapla = async (req, res) => {
   }
 };
 
+exports.burcHesapla = async (req,res) => {
+try {
+  const {birthDate} = req.body;
+  const {userId} = req.params;
+  const birth = new Date(birthDate)
+  const zodiacSign = utils.burcHesap(birth.getDate(),birth.getMonth() + 1)
+ 
+  const user = await User.findById(userId)
+  if (!user || user.length === 0 ) {
+    throw new Error("Kullanıcı bulunamadı")
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(userId,{
+    birthDate:birthDate,
+  },{new:true})
+  res.json({
+    ...baseResponse,
+    code:StatusCodes.OK,
+    timestamp:new Date(),
+    data:updatedUser,
+    message:`Burcunuz ${zodiacSign}`,
+  }).status(StatusCodes.OK)
+} catch (error) {
+  res.json({
+  ...baseResponse,
+  code:StatusCodes.INTERNAL_SERVER_ERROR,
+  timestamp:new Date (),
+  error:true,
+  succes:false,
+  message:error.message,    
+  }).status(StatusCodes.INTERNAL_SERVER_ERROR)
+}
+}
