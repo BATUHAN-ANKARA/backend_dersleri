@@ -77,8 +77,8 @@ exports.notHesapla = async (req, res) => {
 
     let ortalama = vizeNotu * 0.4 + finalNotu * 0.6;
 
-    let {harfNotu,isPassed} = utils.harfNotuHesapla(finalNotu,ortalama)
-    
+    let { harfNotu, isPassed } = utils.harfNotuHesapla(finalNotu, ortalama);
+
     const user = await User.findById(userId);
 
     if (!user || user.length === 0) {
@@ -125,36 +125,43 @@ exports.notHesapla = async (req, res) => {
   }
 };
 
-exports.burcHesapla = async (req,res) => {
-try {
-  const {birthDate} = req.body;
-  const {userId} = req.params;
-  const birth = new Date(birthDate)
-  const zodiacSign = utils.burcHesap(birth.getDate(),birth.getMonth() + 1)
- 
-  const user = await User.findById(userId)
-  if (!user || user.length === 0 ) {
-    throw new Error("Kullanıcı bulunamadı")
-  }
+exports.burcHesapla = async (req, res) => {
+  try {
+    const { birthDate } = req.body;
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user || user.length === 0) {
+      throw new Error("Kullanıcı bulunamadı");
+    }
+    const birth = new Date(birthDate);
+    const zodiacSign = utils.burcHesap(birth.getDate(), birth.getMonth() + 1);
 
-  const updatedUser = await User.findByIdAndUpdate(userId,{
-    birthDate:birthDate,
-  },{new:true})
-  res.json({
-    ...baseResponse,
-    code:StatusCodes.OK,
-    timestamp:new Date(),
-    data:updatedUser,
-    message:`Burcunuz ${zodiacSign}`,
-  }).status(StatusCodes.OK)
-} catch (error) {
-  res.json({
-  ...baseResponse,
-  code:StatusCodes.INTERNAL_SERVER_ERROR,
-  timestamp:new Date (),
-  error:true,
-  succes:false,
-  message:error.message,    
-  }).status(StatusCodes.INTERNAL_SERVER_ERROR)
-}
-}
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        birthDate: birthDate,
+      },
+      { new: true }
+    );
+    res
+      .json({
+        ...baseResponse,
+        code: StatusCodes.OK,
+        timestamp: new Date(),
+        data: updatedUser,
+        message: `Burcunuz ${zodiacSign}`,
+      })
+      .status(StatusCodes.OK);
+  } catch (error) {
+    res
+      .json({
+        ...baseResponse,
+        code: StatusCodes.INTERNAL_SERVER_ERROR,
+        timestamp: new Date(),
+        error: true,
+        succes: false,
+        message: error.message,
+      })
+      .status(StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+};
