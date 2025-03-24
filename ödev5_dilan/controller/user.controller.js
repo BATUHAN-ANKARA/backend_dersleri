@@ -5,10 +5,9 @@ const utils = require("../utils/helper");
 
 exports.register = async (req, res) => {
   try {
-    const { name, surname, email, password } = req.body;
-    const existUser = await User.find({ email: email });
-    if (existUser.length > 0) {
-      throw new Error("Email zaten kullanımda");
+    const { name, email, surname, password } = req.body;
+    if (await User.exists({ email: email })) {
+      throw new Error("E-mail zaten kullanımda");
     }
     const _password = utils.hashToPassword(password);
     const user = new User({
