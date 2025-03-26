@@ -60,14 +60,11 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
-//Tüm ürünlerden fiyatı 1000den büyük olanlar
-// $gt => 'den daha büyük $gt: 1000 (1000den daha büyük olanlar)
-
-exports.getProductsByPriceGreater = async (req, res) => {
+//sorgu1 (fiyatı  val değerinden büyük veya eşit olan ürünleri getir)
+exports.sorgu1 = async (req, res) => {
   try {
-    const { value } = req.params;
-    const products = await Product.find({ price: { $gt: value } });
-    //eğer $gte olsaydı büyük veya eşit mi diye soracaktı
+    const { val } = req.params;
+    const products = await Product.find({ price: { $gte: val } });
     res
       .json({
         ...baseResponse,
@@ -89,12 +86,62 @@ exports.getProductsByPriceGreater = async (req, res) => {
   }
 };
 
-exports.getProductsByFilter = async (req, res) => {
+//sorgu2 (fiyatı  val değerinden küçük veya eşit olan ürünleri getir)
+exports.sorgu2 = async (req, res) => {
   try {
-    //fiyatı val1den büyük olan ve stok miktarı val2den büyük olan
-    // const { val } = req.params;
+    const { val } = req.params;
+    const products = await Product.find({ price: { $lte: val } });
+    res
+      .json({
+        ...baseResponse,
+        data: products,
+        code: StatusCodes.OK,
+        message: "Ürünler listelendi",
+      })
+      .status(StatusCodes.OK);
+  } catch (error) {
+    res
+      .json({
+        ...baseResponse,
+        success: false,
+        error: true,
+        message: error.message,
+        code: StatusCodes.INTERNAL_SERVER_ERROR,
+      })
+      .status(StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+};
+
+//sorgu3 (fiyatı  val1 değerinden küçük veya eşit val2 değerinden büyük veya eşit olan ürünleri getir)
+exports.sorgu3 = async (req, res) => {
+  try {
+    const { val1, val2 } = req.params;
+    const products = await Product.find({ price: { $gte: val1, $lte: val2 } });
+    res
+      .json({
+        ...baseResponse,
+        data: products,
+        code: StatusCodes.OK,
+        message: "Ürünler listelendi",
+      })
+      .status(StatusCodes.OK);
+  } catch (error) {
+    res
+      .json({
+        ...baseResponse,
+        success: false,
+        error: true,
+        message: error.message,
+        code: StatusCodes.INTERNAL_SERVER_ERROR,
+      })
+      .status(StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+};
+
+//sorgu4 (stok bilgisi olmayan ürünleri getir)
+exports.sorgu4 = async (req, res) => {
+  try {
     const products = await Product.find({ stock: { $exists: false } });
-    // $exixsts true var mı diye false yok mu diye sorgular
     res
       .json({
         ...baseResponse,
@@ -116,54 +163,118 @@ exports.getProductsByFilter = async (req, res) => {
   }
 };
 
-// exports.getProductsByFilter = async (req, res) => {
-//   try {
-//     const { val } = req.params;
-//     const products = await Product.find({ name: { $eq: val } });
-//     //$ne kullanımı -not equal- demek (buna eşit olmayanları filtreler)
-//     res
-//       .json({
-//         ...baseResponse,
-//         data: products,
-//         code: StatusCodes.OK,
-//         message: "Ürünler listelendi",
-//       })
-//       .status(StatusCodes.OK);
-//   } catch (error) {
-//     res
-//       .json({
-//         ...baseResponse,
-//         success: false,
-//         error: true,
-//         message: error.message,
-//         code: StatusCodes.INTERNAL_SERVER_ERROR,
-//       })
-//       .status(StatusCodes.INTERNAL_SERVER_ERROR);
-//   }
-// };
+//fiyatı val1den büyük eşit olan (veya) stok miktarı val2den fazla olanlar
+exports.sorgu5 = async (req, res) => {
+  try {
+    const { val1, val2 } = req.params;
+    const products = await Product.find({
+      $or: [{ price: { $gte: val1 } }, { stock: { $gte: val2 } }],
+    });
+    res
+      .json({
+        ...baseResponse,
+        data: products,
+        code: StatusCodes.OK,
+        message: "Ürünler listelendi",
+      })
+      .status(StatusCodes.OK);
+  } catch (error) {
+    res
+      .json({
+        ...baseResponse,
+        success: false,
+        error: true,
+        message: error.message,
+        code: StatusCodes.INTERNAL_SERVER_ERROR,
+      })
+      .status(StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+};
 
-// exports.getProductsByFilter = async (req, res) => {
-//   try {
-//     const { val1, val2 } = req.params;
-//     const products = await Product.find({ price: { $lte: val2, $gte: val1 } });
-//     //eğer $gt ve $lt bir arada kullanılırsa aralık içerisindeki ürünler döner (kısaca range)
-//     res
-//       .json({
-//         ...baseResponse,
-//         data: products,
-//         code: StatusCodes.OK,
-//         message: "Ürünler listelendi",
-//       })
-//       .status(StatusCodes.OK);
-//   } catch (error) {
-//     res
-//       .json({
-//         ...baseResponse,
-//         success: false,
-//         error: true,
-//         message: error.message,
-//         code: StatusCodes.INTERNAL_SERVER_ERROR,
-//       })
-//       .status(StatusCodes.INTERNAL_SERVER_ERROR);
-//   }
-// };
+//fiyatı val1den büyük eşit olan val2den küçük eşit olan (veya) stok miktarı val3den fazla olanlar
+exports.sorgu6 = async (req, res) => {
+  try {
+    const { val1, val2 } = req.params;
+    const products = await Product.find({
+      $or: [{ price: { $gte: val1, $lte: val2 } }, { stock: { $gte: val3 } }],
+    });
+    res
+      .json({
+        ...baseResponse,
+        data: products,
+        code: StatusCodes.OK,
+        message: "Ürünler listelendi",
+      })
+      .status(StatusCodes.OK);
+  } catch (error) {
+    res
+      .json({
+        ...baseResponse,
+        success: false,
+        error: true,
+        message: error.message,
+        code: StatusCodes.INTERNAL_SERVER_ERROR,
+      })
+      .status(StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+};
+
+//fiyatı val1den büyük val2den küçük eşit olan ve description olmayan stok miktarı val3den büyük eşit olanlar
+exports.sorgu7 = async (req, res) => {
+  try {
+    const { val1, val2, val3 } = req.params;
+    const products = await Product.find({
+      $and: [
+        { price: { $gt: val1, $lte: val2 } },
+        { stock: { $gte: val3 } },
+        { description: { $exists: false } },
+      ],
+    });
+    res
+      .json({
+        ...baseResponse,
+        data: products,
+        code: StatusCodes.OK,
+        message: "Ürünler listelendi",
+      })
+      .status(StatusCodes.OK);
+  } catch (error) {
+    res
+      .json({
+        ...baseResponse,
+        success: false,
+        error: true,
+        message: error.message,
+        code: StatusCodes.INTERNAL_SERVER_ERROR,
+      })
+      .status(StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+};
+
+//ismi val olmayan ürünleri getir
+exports.sorgu8 = async (req, res) => {
+  try {
+    const { val } = req.params;
+    const products = await Product.find({ name: { $ne: val } });
+    res
+      .json({
+        ...baseResponse,
+        data: products,
+        code: StatusCodes.OK,
+        message: "Ürünler listelendi",
+      })
+      .status(StatusCodes.OK);
+  } catch (error) {
+    res
+      .json({
+        ...baseResponse,
+        success: false,
+        error: true,
+        message: error.message,
+        code: StatusCodes.INTERNAL_SERVER_ERROR,
+      })
+      .status(StatusCodes.INTERNAL_SERVER_ERROR);
+  }
+};
+
+//$in $nin $size $all
