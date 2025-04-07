@@ -16,7 +16,7 @@ backend_dersleri/
 │   ├── models/           # MongoDB şemalarının bulunduğu model dosyaları
 │   ├── routes/           # API yönlendirmelerini yöneten route dosyaları
 │   ├── config/           # Ortam değişkenleri ve veritabanı bağlantı ayarları
-│   ├── app.js            # Express.js uygulamasının başlangıç dosyası
+│   ├── server.js            # Express.js uygulamasının başlangıç dosyası
 │── .env                  # Ortam değişkenlerini içeren dosya
 │── package.json          # Bağımlılıkları ve scriptleri tanımlayan dosya
 │── README.md             # Proje hakkında bilgiler
@@ -121,7 +121,7 @@ backend_lessons/
 │   ├── models/           # Model files containing MongoDB schemas
 │   ├── routes/           # Route files managing API routing
 │   ├── config/           # Environment variables and database connection settings
-│   ├── app.js            # The entry file of the Express.js application
+│   ├── server.js            # The entry file of the Express.js application
 │── .env                  # File containing environment variables
 │── package.json          # File defining dependencies and scripts
 │── README.md             # Project information
