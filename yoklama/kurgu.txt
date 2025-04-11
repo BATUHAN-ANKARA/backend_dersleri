@@ -1,0 +1,57 @@
+öğrenci derse girdi, beş dk kare kod gözükecek sonra kare kodu okuttuktan sonra hocanın sistemine okutuldu olarak
+geçecek, öğrenci kayıt olabilir(okul bazlı) 
+batuhan bilgisayar mühendisliği 3. sınıf öğrencisi web programla dersine geldi
+hocasının ekranda gösterdiği qr kodu uygulamaya giriş yapıp qr scanner ile okutacak ve tamam butonuna tıklayacak
+bu adımlar sonrasında hocasının ekranına batuhan şu tarihteki derse katıldı
+
+öğrenci modeli olması lazım (isim soyisim öğrencino okul bölüm katıldığım dersler)
+öğretmen modeli olması lazım (derslerim derslerekatılanlar dersten başarısızolanlar)
+derstenbaşarısızolanlar modeli (id isim soyisim ders)
+ders modeli olması lazım(id öğretmen katılanlar)
+
+x hocasının pazartesi ve salı günü ikişer adet dersi var 
+
+matematik dersi
+öğretmen: batuhan
+katılanlar: a,b,c
+tarih: 11 nisan cuma
+
+BLM MAT1 102 pzt 
+
+courseCode
+courseName
+schedule: date-participants(isim soyisim)
+
+{
+  "courseCode": "BLM MAT1 102",
+  "courseName": "Matematik I",
+  "schedule": [
+    {
+      "date": "2025-03-03",
+      "participants": [
+        "Ahmet Yılmaz",
+        "Zeynep Kaya",
+        "Mehmet Demir"
+      ]
+    },
+    {
+      "date": "2025-03-10",
+      "participants": [
+        "Ahmet Yılmaz",
+        "Elif Çelik",
+        "Mehmet Demir"
+      ]
+    },
+    {
+      "date": "2025-03-17",
+      "participants": [
+        "Zeynep Kaya",
+        "Elif Çelik"
+      ]
+    },
+    {
+      "date": "2025-03-24",
+      "participants": []
+    }
+  ]
+}
