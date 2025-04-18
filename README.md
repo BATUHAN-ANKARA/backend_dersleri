@@ -14,10 +14,15 @@ backend_dersleri/
 
 │   ├── controllers/      # İş mantığını yöneten controller dosyaları
 │   ├── models/           # MongoDB şemalarının bulunduğu model dosyaları
-│   ├── routes/           # API yönlendirmelerini yöneten route dosyaları
-│   ├── config/           # Ortam değişkenleri ve veritabanı bağlantı ayarları
-│   ├── server.js            # Express.js uygulamasının başlangıç dosyası
+│   ├── routers/          # API yönlendirmelerini yöneten route dosyaları
+│   ├── configs/          # Ortam değişkenleri ve veritabanı bağlantı ayarları
+│   ├── db/               # Ortam değişkenleri ve veritabanı bağlantı ayarları
+│   ├── services/         # Ortam değişkenleri ve veritabanı bağlantı ayarları
+│   ├── utils/            # Ortam değişkenleri ve veritabanı bağlantı ayarları
+│   ├── validations/      # Ortam değişkenleri ve veritabanı bağlantı ayarları
+│   ├── dto/              # Ortam değişkenleri ve veritabanı bağlantı ayarları
 │── .env                  # Ortam değişkenlerini içeren dosya
+│── server.js             # Express.js uygulamasının başlangıç dosyası
 │── package.json          # Bağımlılıkları ve scriptleri tanımlayan dosya
 │── README.md             # Proje hakkında bilgiler
 ```
@@ -38,15 +43,21 @@ git clone https://github.com/BATUHAN-ANKARA/backend_dersleri.git
 cd backend_dersleri
 ```
 
+### 2️⃣ Örneklerden Birine Girin
+
+```bash
+cd validator
+```
+
 ### 3️⃣ Bağımlılıkları Yükleyin
 
 ```bash
-npm install
+npm install || yarn
 ```
 
 ### 4️⃣ Ortam Değişkenlerini Ayarlayın
 
-`.env` dosyanızı oluşturun ve aşağıdaki değişkenleri ekleyin:
+`.env` dosyanızı oluşturun içeriğinin detayları için issue açabilirsiniz:
 
 
 **⚠️ Önemli:** "kullanici_adi" ve "sifre" kısımlarını kendi MongoDB bilgilerinizle değiştirmeyi unutmayın!
@@ -54,13 +65,7 @@ npm install
 ### 5️⃣ Uygulamayı Başlatın
 
 ```bash
-npm start
-```
-
-Alternatif olarak, geliştirme sürecinde otomatik güncelleme için:
-
-```bash
-npm run dev
+npm start || yarn start
 ```
 
 ## 🚀 Kullanılan Teknolojiler
@@ -69,12 +74,13 @@ Bu projede **Node.js** ile backend geliştirme yapılırken aşağıdaki popüle
 
 | 📦 Paket | 📌 Açıklama |
 |-------|---------|
-| `Express.js` | Minimalist ve hızlı bir web çatısıdır. API geliştirme için idealdir. |
-| `Nodemon` | Geliştirme sırasında kod değiştiğinde sunucuyu otomatik yeniden başlatır. |
-| `Dotenv` | Ortam değişkenlerini yönetmek için kullanılır. |
-| `Mongoose` | MongoDB ile etkileşim için kullanılan güçlü bir ODM kütüphanesidir. |
-| `MD5` | Kullanıcı verilerini güvenli bir şekilde şifrelemek için kullanılır. |
-| `HTTP-Status-Codes` | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
+| `express` | Minimalist ve hızlı bir web çatısıdır. API geliştirme için idealdir. |
+| `nodemon` | Geliştirme sırasında kod değiştiğinde sunucuyu otomatik yeniden başlatır. |
+| `dotenv` | Ortam değişkenlerini yönetmek için kullanılır. |
+| `mongoose` | MongoDB ile etkileşim için kullanılan güçlü bir ODM kütüphanesidir. |
+| `md5` | Kullanıcı verilerini güvenli bir şekilde şifrelemek için kullanılır. |
+| `http-status-codes` | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
+| `express-validator` | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
 
 ## 💻 Terminal Komutları
 
@@ -90,7 +96,8 @@ Aşağıda projede sıkça kullanılan **Git ve Node.js** komutları verilmişti
 | `git pull origin main` | Uzak repodan en son değişiklikleri çeker. |
 | `npm install` | Proje bağımlılıklarını yükler. |
 | `npm start` | Uygulamayı başlatır. |
-| `npm run dev` | Nodemon ile geliştirme modunda başlatır. |
+| `yarn start` | Uygulamayı başlatır. |
+| `yarn` | Proje bağımlılıklarını yükler. |
 
 **⚠️ Öneri:** Değişiklikleri uzak depoya göndermeden önce `git pull origin main` komutuyla en güncel değişiklikleri aldığınızdan emin olun!
 
