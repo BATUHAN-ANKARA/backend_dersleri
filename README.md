@@ -12,18 +12,18 @@ Proje aşağıdaki klasör ve dosya yapısına sahiptir:
 ```
 backend_dersleri/
 
+│   ├── configs/          # Konfigürasyon dosyaları ve ortam ayarları
 │   ├── controllers/      # İş mantığını yöneten controller dosyaları
+│   ├── db/               # Veritabanı bağlantı işlemleri
+│   ├── dto/              # Veri transfer objeleri
 │   ├── models/           # MongoDB şemalarının bulunduğu model dosyaları
 │   ├── routers/          # API yönlendirmelerini yöneten route dosyaları
-│   ├── configs/          # Ortam değişkenleri ve veritabanı bağlantı ayarları
-│   ├── db/               # Ortam değişkenleri ve veritabanı bağlantı ayarları
-│   ├── services/         # Ortam değişkenleri ve veritabanı bağlantı ayarları
-│   ├── utils/            # Ortam değişkenleri ve veritabanı bağlantı ayarları
-│   ├── validations/      # Ortam değişkenleri ve veritabanı bağlantı ayarları
-│   ├── dto/              # Ortam değişkenleri ve veritabanı bağlantı ayarları
+│   ├── services/         # Servis katmanındaki yardımcı fonksiyonlar
+│   ├── utils/            # Yardımcı araçlar ve fonksiyonlar
+│   ├── validations/      # Veri doğrulama kuralları
 │── .env                  # Ortam değişkenlerini içeren dosya
-│── server.js             # Express.js uygulamasının başlangıç dosyası
 │── package.json          # Bağımlılıkları ve scriptleri tanımlayan dosya
+│── server.js             # Express.js uygulamasının başlangıç dosyası
 │── README.md             # Proje hakkında bilgiler
 ```
 
@@ -43,29 +43,29 @@ git clone https://github.com/BATUHAN-ANKARA/backend_dersleri.git
 cd backend_dersleri
 ```
 
-### 2️⃣ Örneklerden Birine Girin
+### 3️⃣ Örneklerden Birine Girin
 
 ```bash
 cd validator
 ```
 
-### 3️⃣ Bağımlılıkları Yükleyin
+### 4️⃣ Bağımlılıkları Yükleyin
 
 ```bash
-npm install || yarn
+npm install |# or yarn
 ```
 
-### 4️⃣ Ortam Değişkenlerini Ayarlayın
+### 5️⃣ Ortam Değişkenlerini Ayarlayın
 
 `.env` dosyanızı oluşturun içeriğinin detayları için issue açabilirsiniz:
 
 
 **⚠️ Önemli:** "kullanici_adi" ve "sifre" kısımlarını kendi MongoDB bilgilerinizle değiştirmeyi unutmayın!
 
-### 5️⃣ Uygulamayı Başlatın
+### 6️⃣ Uygulamayı Başlatın
 
 ```bash
-npm start || yarn start
+npm start |# or yarn start
 ```
 
 ## 🚀 Kullanılan Teknolojiler
@@ -80,7 +80,7 @@ Bu projede **Node.js** ile backend geliştirme yapılırken aşağıdaki popüle
 | `mongoose` | MongoDB ile etkileşim için kullanılan güçlü bir ODM kütüphanesidir. |
 | `md5` | Kullanıcı verilerini güvenli bir şekilde şifrelemek için kullanılır. |
 | `http-status-codes` | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
-| `express-validator` | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
+| `express-validator` | Gelen istekleri doğrulamak için kullanılır. |
 
 ## 💻 Terminal Komutları
 
@@ -124,14 +124,19 @@ The project has the following folder and file structure:
 ```
 backend_lessons/
 
-│   ├── controllers/      # Controller files that manage business logic
-│   ├── models/           # Model files containing MongoDB schemas
-│   ├── routes/           # Route files managing API routing
-│   ├── config/           # Environment variables and database connection settings
-│   ├── server.js            # The entry file of the Express.js application
-│── .env                  # File containing environment variables
-│── package.json          # File defining dependencies and scripts
-│── README.md             # Project information
+│   ├── configs/          # Configuration files and environment settings  
+│   ├── controllers/      # Controller files managing business logic  
+│   ├── db/               # Database connection logic  
+│   ├── dto/              # Data Transfer Objects  
+│   ├── models/           # Model files containing MongoDB schemas  
+│   ├── routers/          # Route files managing API endpoints  
+│   ├── services/         # Service layer and helper functions  
+│   ├── utils/            # Utility functions and helper tools  
+│   ├── validations/      # Data validation rules  
+│── .env                  # File containing environment variables  
+│── package.json          # File defining dependencies and scripts  
+│── server.js             # Entry point of the Express.js application  
+│── README.md             # Project documentation  
 ```
 
 ## 📥 Installation
@@ -148,20 +153,25 @@ To install the project locally, follow these steps:
    cd backend_lessons
    ```
 
-3. Install dependencies:
+3. Navigate to an Example:
    ```bash
-   npm install
+   cd validator
    ```
 
-4. Create a `.env` file and configure environment variables:
+4. Install dependencies:
+   ```bash
+   npm install |# or yarn 
+   ```
+
+5. Create a `.env` file and configure environment variables:
    ```
    PORT=3000
    MONGO_URI=your_mongodb_connection_string
    ```
 
-5. Start the development server:
+6. Start the application:
    ```bash
-   npm run dev
+   npm start |# or yarn start
    ```
 
 ## 🚀 Usage
