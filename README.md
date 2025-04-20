@@ -52,7 +52,7 @@ cd validator
 ### 4️⃣ Bağımlılıkları Yükleyin
 
 ```bash
-npm install |# or yarn
+npm install veya yarn
 ```
 
 ### 5️⃣ Ortam Değişkenlerini Ayarlayın
@@ -65,7 +65,7 @@ npm install |# or yarn
 ### 6️⃣ Uygulamayı Başlatın
 
 ```bash
-npm start |# or yarn start
+npm start veya yarn start
 ```
 
 ## 🚀 Kullanılan Teknolojiler
@@ -160,7 +160,7 @@ To install the project locally, follow these steps:
 
 4. Install dependencies:
    ```bash
-   npm install |# or yarn 
+   npm install or yarn 
    ```
 
 5. Create a `.env` file and configure environment variables:
@@ -171,7 +171,7 @@ To install the project locally, follow these steps:
 
 6. Start the application:
    ```bash
-   npm start |# or yarn start
+   npm start or yarn start
    ```
 
 ## 🚀 Usage
