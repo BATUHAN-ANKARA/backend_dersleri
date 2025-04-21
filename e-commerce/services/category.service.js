@@ -81,7 +81,7 @@ exports.getCategoriesByStatus = async (req) => {
   }
 };
 
-exports.getFeaturedCategories = async (req) => {
+exports.getFeaturedCategories = async () => {
   try {
     const categories = await Category.find({ isFeatured: true });
     return categories;

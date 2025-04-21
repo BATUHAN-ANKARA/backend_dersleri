@@ -1,1 +1,11 @@
-// Your updated index.js content here
+const adminController = require("./admin.controller");
+const blogController = require("./blog.controller");
+const categoryController = require("./category.controller");
+const commentController = require("./comment.controller");
+
+module.exports = {
+  admin: adminController,
+  blog: blogController,
+  category: categoryController,
+  comment: commentController,
+};

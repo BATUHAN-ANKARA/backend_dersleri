@@ -1,7 +1,11 @@
-const userValidator = require("./user.validation");
-const productValidator = require("./product.validation");
+const adminValidator = require("./admin.validation");
+const blogValidator = require("./blog.validation");
+const categoryValidator = require("./category.validation");
+const commentValidator = require("./comment.validation");
 
 module.exports = {
-  userValidator,
-  productValidator,
+  adminValidator,
+  blogValidator,
+  categoryValidator,
+  commentValidator,
 };
