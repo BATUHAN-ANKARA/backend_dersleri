@@ -1,18 +1,14 @@
 const express = require("express");
 const db = require("./db/index");
 const configs = require("./configs/index");
-// const router = require("./routers/index");
+const router = require("./routers/index");
 const app = express();
 app.use(express.json());
 
-
-
-app.use('/',(req,res)=> {
-  res.status(200).json({
-    success:true,
-    message:'Deneme postman çalışması'
-  })
-})
+app.use("/student", router.student);
+app.use("/attendance", router.attendance);
+app.use("/lecture", router.lecture);
+app.use("/teacher", router.teacher);
 
 configs.serverConfig.initialServerConfig();
 

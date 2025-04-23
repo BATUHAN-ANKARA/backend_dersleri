@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const utils = require("../utils/index");
 const services = require("../services"); 
-const baseResponse = require("../dto/baseResponse");
+const baseResponse = require("../dto/baseResponse.dto");
 
 
 

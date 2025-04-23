@@ -1,27 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const studentController = require("../controllers/student.controller");
-const studentValidation = require("../validations/studentValidation");
+const studentValidation = require("../validations/student.validation");
 
 
 router.post(
   "/createStudent",
   [studentValidation.validateCreateStudent()],
-  validateRequest,
   studentController.createStudent
 );
 
 router.put(
   "/updateStudent/:studentId",
   [studentValidation.validateUpdateStudent()],
-  validateRequest,
   studentController.updateStudent
 );
 
 router.delete(
   "/deleteStudent/:studentId",
   [studentValidation.validateDeleteStudent()],
-  validateRequest,
   studentController.deleteStudent
 );
 
@@ -33,7 +30,6 @@ router.get(
 router.get(
   "/getStudentById/:studentId",
   [studentValidation.validateGetStudentById()],
-  validateRequest,
   studentController.getStudentById
 );
 

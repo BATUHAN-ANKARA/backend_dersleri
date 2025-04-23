@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const lectureController = require("../controllers/lecture.controller");
-const lectureValidation = require("../validations/lectureValidation");
+const lectureValidation = require("../validations/lecture.validation");
 
 router.post(
   "/createLecture", 
