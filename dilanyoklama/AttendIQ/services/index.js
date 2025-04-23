@@ -4,8 +4,8 @@ const attendanceService = require("./attendance.service");
 const teacherService = require("./teacher.service");
 
 module.exports = {
-  lectureService,
-  studentService,
-  attendanceService,
-  teacherService,
+  lecture: lectureService,
+  student: studentService,
+  attendance: attendanceService,
+  teacher: teacherService,
 };
