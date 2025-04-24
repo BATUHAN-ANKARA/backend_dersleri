@@ -1,17 +1,6 @@
 const Category = require("../models/category.model");
 const Admin = require("../models/admin.model");
 
-/*
-createCategory
-deleteCategory
-getAllCateories
-getCategoryById
-getFeaturedCategories
-updateCategoryStatus
-getCategoriesByStatus
-updateCategoryFeature
-*/
-
 exports.createCategory = async (req) => {
   try {
     const { name, description, adminId } = req.body;

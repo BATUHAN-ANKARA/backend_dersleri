@@ -1,38 +1,35 @@
 const Sale = require("../models/sale.model");
 const Product = require("../models/product.model");
-
-/*
-fronttan products dizisi gelecek
-dizinin içerisinde(id price quantity)
-dizideki her idli elemanın var olup olmadığına
-*/
+const utils = require("../utils/index");
 
 exports.createSale = async (req) => {
   try {
-    const { products, paymentMethod } = req.body;
-    let totalPrice = 0;
-    for (const product of products) {
-      let dbProduct = await Product.findById(product.productId);
-      console.log(dbProduct);
-      if (!dbProduct) {
-        throw new Error(`${product.productId} idli ürün bulunamadı`);
-      } else if (dbProduct.status != "active") {
-        throw new Error(
-          `${dbProduct.name} ürününün durumu satış için uygun değil`
-        );
-      } else if (dbProduct.stock < product.quantity) {
-        throw new Error(`Stok miktarı ${dbProduct.name} için yeterli değil`);
-      } else if (paymentMethod != "Nakit" && paymentMethod != "Kredi Kartı") {
-        throw new Error("Yanlış ödeme türü seçildi");
-      }
-      totalPrice += product.price * product.quantity;
+    const { products, paymentMethod, user } = req.body;
+
+    if (!products || !Array.isArray(products) || products.length === 0) {
+      throw new Error("Ürün listesi boş olamaz.");
     }
+
+    let totalPrice = 0;
+    for (let item of products) {
+      const product = await Product.findById(item.productId);
+      if (!product) {
+        throw new Error("Ürün bulunamadı: " + item.productId);
+      }
+
+      totalPrice += product.price * item.quantity;
+      item.price = product.price;
+    }
+
     const sale = new Sale({
       products,
-      paymentMethod,
       totalPrice,
+      paymentMethod,
+      user,
     });
+
     await sale.save();
+
     return sale;
   } catch (error) {
     throw new Error(error);
@@ -48,7 +45,50 @@ exports.getAllSales = async () => {
   }
 };
 
-//o günün satışları
-//belirli bir mikatrdan fazla totalpriceı olan satışlar
-//bir aralıktaki satışlar (miktar olarak (totalprice))
-//bir aralıktaki satışlar (tarih olarak (1-14 nisan aralığı))
+exports.getSaleById = async (req) => {
+  try {
+    const { saleId } = req.params;
+    const sale = await Sale.findById(saleId);
+    if (!sale) throw new Error("Satış bulunamadı");
+    return sale;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.updateSale = async (req) => {
+  try {
+    const { saleId } = req.params;
+    const { updateData } = req.body;
+    const sale = await Sale.findById(saleId);
+    if (!sale) throw new Error("Satış bulunamadı");
+
+    if (updateData.products) {
+      let totalPrice = 0;
+      for (let item of updateData.products) {
+        const product = await Product.findById(item.productId);
+        if (!product) throw new Error(`Ürün bulunamadı: ${item.productId}`);
+        totalPrice += product.price * item.quantity;
+      }
+      updateData.totalPrice = totalPrice;
+    }
+
+    const updatedSale = await Sale.findByIdAndUpdate(saleId, updateData, {
+      new: true,
+    });
+    return updatedSale;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.deleteSale = async (req) => {
+  try {
+    const { saleId } = req.params;
+    const sale = await Sale.findByIdAndDelete(saleId);
+    if (!sale) throw new Error("Satış bulunamadı");
+    return { message: "Satış başarıyla silindi" };
+  } catch (error) {
+    throw new Error(error);
+  }
+};

@@ -2,7 +2,7 @@ const Product = require("../models/product.model");
 
 exports.createProduct = async (req) => {
   try {
-    const { name, price, stock, category, subCategory } = req.body;
+    const { name, price, stock, category, description } = req.body;
     const existProduct = await Product.findOne({ name: name });
     if (existProduct) {
       throw new Error("Bu ürün zaten var");
@@ -11,7 +11,7 @@ exports.createProduct = async (req) => {
       name,
       price,
       category,
-      subCategory,
+      description,
       stock,
     });
     await product.save();
@@ -21,7 +21,7 @@ exports.createProduct = async (req) => {
   }
 };
 
-exports.getAllProducts = async (req) => {
+exports.getAllProducts = async () => {
   try {
     const products = await Product.find({ status: "active" });
     return products;
@@ -63,20 +63,8 @@ exports.getProductsByCategory = async (req) => {
   }
 };
 
-exports.getProductsBySubCategory = async (req) => {
-  try {
-    const { subCategory } = req.params;
-    const products = await Product.find({
-      subCategory: subCategory,
-      status: "active",
-    });
-    return products;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
 
-exports.getProductsWithStock = async (req) => {
+exports.getProductsWithStock = async () => {
   try {
     const products = await Product.find({
       stock: { $gte: 1 },
@@ -104,21 +92,6 @@ exports.getProductsWithStockCategory = async (req) => {
   }
 };
 
-exports.getProductsWithStockSubCategory = async (req) => {
-  try {
-    const { subCategory } = req.params;
-    const products = await Product.find({
-      $and: [
-        { subCategory: { $eq: subCategory } },
-        { stock: { $gte: 1 } },
-        { status: { $eq: "active" } },
-      ],
-    });
-    return products;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
 
 exports.getProductsPriceGreater = async (req) => {
   try {

@@ -23,6 +23,13 @@ const userValidator = {
   validateDeleteUser() {
     return [param("userId").not().isEmpty().isMongoId()];
   },
+  validateChangePassword() {
+    return [
+      param("id").not().isEmpty().isMongoId(),
+      body("password").not().isEmpty().isLength({ min: 4, max: 8 }),
+      body("newPassword").not().isEmpty().isLength({ min: 4, max: 8 }),
+    ];
+  },
 };
 
 module.exports = userValidator;

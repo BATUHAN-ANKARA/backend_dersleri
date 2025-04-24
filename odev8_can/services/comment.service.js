@@ -3,17 +3,6 @@ const Product = require("../models/product.model");
 const User = require("../models/user.model");
 const Admin = require("../models/admin.model");
 
-/*
-createComment
-deleteComment
-getAllComments
-getCommentById
-getCommentsByUser
-getCommentsByProduct
-getFeaturedComments
-updateCommentStatus
-updateCommentFeature
-*/
 
 exports.createComment = async (req) => {
   try {

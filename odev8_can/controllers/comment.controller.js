@@ -1,16 +1,24 @@
-const commentService = require("../services/index");
+const services = require("../services/index");
 const utils = require("../utils/index");
-const baseResponse = require("../dto/index");
 const { StatusCodes } = require("http-status-codes");
+const baseResponse = require("../dto/baseResponse.dto");
+
 
 exports.createComment = async (req, res) => {
   try {
-    const data = await commentService.commentService.createComment(req);
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.createComment(req);
     res.status(StatusCodes.CREATED).json({
       ...baseResponse,
-      data: data,
-      message: "Yorum başarıyla oluşturuldu",
       code: StatusCodes.CREATED,
+      data: json,
+      message: "Yorum ekleme başarılı",
+      timestamp: new Date(),
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -18,6 +26,7 @@ exports.createComment = async (req, res) => {
       success: false,
       error: true,
       message: error.message,
+      timestamp: new Date(),
       code: StatusCodes.INTERNAL_SERVER_ERROR,
     });
   }
@@ -25,12 +34,19 @@ exports.createComment = async (req, res) => {
 
 exports.deleteComment = async (req, res) => {
   try {
-    const data = await commentService.commentService.deleteComment(req);
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.deleteComment(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
-      data: data,
-      message: "Yorum başarıyla silindi",
       code: StatusCodes.OK,
+      data: json,
+      message: "Silme başarılı",
+      timestamp: new Date(),
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -38,6 +54,7 @@ exports.deleteComment = async (req, res) => {
       success: false,
       error: true,
       message: error.message,
+      timestamp: new Date(),
       code: StatusCodes.INTERNAL_SERVER_ERROR,
     });
   }
@@ -45,12 +62,19 @@ exports.deleteComment = async (req, res) => {
 
 exports.getAllComments = async (req, res) => {
   try {
-    const data = await commentService.commentService.getAllComments();
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.getAllComments();
     res.status(StatusCodes.OK).json({
       ...baseResponse,
-      data: data,
-      message: "Tüm yorumlar listelendi",
       code: StatusCodes.OK,
+      data: json,
+      message: "Listeleme başarılı",
+      timestamp: new Date(),
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -58,6 +82,7 @@ exports.getAllComments = async (req, res) => {
       success: false,
       error: true,
       message: error.message,
+      timestamp: new Date(),
       code: StatusCodes.INTERNAL_SERVER_ERROR,
     });
   }
@@ -65,12 +90,19 @@ exports.getAllComments = async (req, res) => {
 
 exports.getCommentById = async (req, res) => {
   try {
-    const data = await commentService.commentService.getCommentById(req);
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.getCommentById(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
-      data: data,
-      message: "Yorum getirildi",
       code: StatusCodes.OK,
+      data: json,
+      message: "Listeleme başarılı",
+      timestamp: new Date(),
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -78,26 +110,7 @@ exports.getCommentById = async (req, res) => {
       success: false,
       error: true,
       message: error.message,
-      code: StatusCodes.INTERNAL_SERVER_ERROR,
-    });
-  }
-};
-
-exports.getCommentsByUser = async (req, res) => {
-  try {
-    const data = await commentService.commentService.getCommentsByUser(req);
-    res.status(StatusCodes.OK).json({
-      ...baseResponse,
-      data: data,
-      message: "Kullanıcının yorumları listelendi",
-      code: StatusCodes.OK,
-    });
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      ...baseResponse,
-      success: false,
-      error: true,
-      message: error.message,
+      timestamp: new Date(),
       code: StatusCodes.INTERNAL_SERVER_ERROR,
     });
   }
@@ -105,12 +118,19 @@ exports.getCommentsByUser = async (req, res) => {
 
 exports.getCommentsByProduct = async (req, res) => {
   try {
-    const data = await commentService.commentService.getCommentsByProduct(req);
+    const isInvalid = utils.helper.handleValidation();
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.getCommentsByProduct(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
-      data: data,
-      message: "Ürüne ait yorumlar listelendi",
       code: StatusCodes.OK,
+      data: json,
+      message: "Listeleme başarılı",
+      timestamp: new Date(),
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -118,6 +138,35 @@ exports.getCommentsByProduct = async (req, res) => {
       success: false,
       error: true,
       message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};
+
+exports.getCommentsByUser = async (req, res) => {
+  try {
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.getCommentsByUser(req);
+    res.status(StatusCodes.OK).json({
+      ...baseResponse,
+      code: StatusCodes.OK,
+      data: json,
+      message: "Listeleme başarılı",
+      timestamp: new Date(),
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      success: false,
+      error: true,
+      message: error.message,
+      timestamp: new Date(),
       code: StatusCodes.INTERNAL_SERVER_ERROR,
     });
   }
@@ -125,12 +174,19 @@ exports.getCommentsByProduct = async (req, res) => {
 
 exports.getFeaturedComments = async (req, res) => {
   try {
-    const data = await commentService.commentService.getFeaturedComments();
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.getFeaturedComments(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
-      data: data,
-      message: "Öne çıkarılan yorumlar listelendi",
       code: StatusCodes.OK,
+      data: json,
+      message: "Listeleme başarılı",
+      timestamp: new Date(),
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -138,26 +194,7 @@ exports.getFeaturedComments = async (req, res) => {
       success: false,
       error: true,
       message: error.message,
-      code: StatusCodes.INTERNAL_SERVER_ERROR,
-    });
-  }
-};
-
-exports.updateCommentStatus = async (req, res) => {
-  try {
-    const data = await commentService.commentService.updateCommentStatus(req);
-    res.status(StatusCodes.OK).json({
-      ...baseResponse,
-      data: data,
-      message: "Yorum statüsü güncellendi",
-      code: StatusCodes.OK,
-    });
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      ...baseResponse,
-      success: false,
-      error: true,
-      message: error.message,
+      timestamp: new Date(),
       code: StatusCodes.INTERNAL_SERVER_ERROR,
     });
   }
@@ -165,12 +202,19 @@ exports.updateCommentStatus = async (req, res) => {
 
 exports.updateCommentFeature = async (req, res) => {
   try {
-    const data = await commentService.commentService.updateCommentFeature(req);
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.updateCommentFeature(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
-      data: data,
-      message: "Yorum öne çıkarıldı/gizlendi",
       code: StatusCodes.OK,
+      data: json,
+      message: "Güncelleme başarılı",
+      timestamp: new Date(),
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -178,6 +222,35 @@ exports.updateCommentFeature = async (req, res) => {
       success: false,
       error: true,
       message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};
+
+exports.updateCommentStatus = async (req, res) => {
+  try {
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.comment.updateCommentStatus(req);
+    res.status(StatusCodes.OK).json({
+      ...baseResponse,
+      code: StatusCodes.OK,
+      data: json,
+      message: "Güncelleme başarılı",
+      timestamp: new Date(),
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      success: false,
+      error: true,
+      message: error.message,
+      timestamp: new Date(),
       code: StatusCodes.INTERNAL_SERVER_ERROR,
     });
   }

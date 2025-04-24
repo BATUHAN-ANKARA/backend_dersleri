@@ -1,17 +1,6 @@
 const Blog = require("../models/blog.model");
 const Admin = require("../models/admin.model");
 
-/*
-createBlog
-deleteBlog
-getAllBlogs
-getBlogById
-getBlogsByTitle
-updateBlogStatus
-getBlogsByAuthor
-getBlogsByStatus
-*/
-
 exports.createBlog = async (req) => {
   try {
     const { title, content, author, tags } = req.body;

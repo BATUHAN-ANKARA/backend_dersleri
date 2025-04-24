@@ -9,8 +9,15 @@ configs.serverConfig.initialServerConfig();
 
 const PORT = process.env.PORT;
 
-app.use("/user", router.userRouter);
-app.use("/product", router.productRouter);
+app.use("/admin", router.adminRouter);
+app.use("/blog", router.blogRouter);
+app.use("/category", router.categoryRouter);
+app.use("/comment", router.commentRouter);
+app.use("/product",router.productRouter);
+app.use("/sale",router.saleRouter);
+app.use("/user",router.userRouter);
+
+
 
 db.mongoConnect
   .mongoConnect()

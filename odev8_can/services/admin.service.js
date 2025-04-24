@@ -1,17 +1,7 @@
 const Admin = require("../models/admin.model");
 const utils = require("../utils/index");
 
-/*
-createAdmin
-loginAdmin
-changePassword
-updateStatus
-getAll
-getById
-getByName
-getActive/Inactive/Pending
-deleteById
-*/
+
 
 exports.createAdmin = async (req) => {
   try {
