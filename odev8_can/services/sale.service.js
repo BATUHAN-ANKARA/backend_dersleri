@@ -1,6 +1,7 @@
 const Sale = require("../models/sale.model");
 const Product = require("../models/product.model");
 const utils = require("../utils/index");
+const User=require("../models/user.model");
 
 exports.createSale = async (req) => {
   try {
@@ -29,6 +30,12 @@ exports.createSale = async (req) => {
     });
 
     await sale.save();
+
+    await User.findByIdAndUpdate(user, {
+      $push: {
+        purchaseHistory: { saleId: sale._id },
+      },
+    }, { new: true, runValidators: true });
 
     return sale;
   } catch (error) {
@@ -87,6 +94,9 @@ exports.deleteSale = async (req) => {
     const { saleId } = req.params;
     const sale = await Sale.findByIdAndDelete(saleId);
     if (!sale) throw new Error("Satış bulunamadı");
+    await User.updateOne(
+      { _id: sale.user }, 
+      { $pull: { purchaseHistory: { saleId: saleId } } } );
     return { message: "Satış başarıyla silindi" };
   } catch (error) {
     throw new Error(error);

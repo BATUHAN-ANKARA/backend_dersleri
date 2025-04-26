@@ -62,13 +62,7 @@ exports.getAllSales = async (req, res) => {
 
 exports.getSaleById = async (req, res) => {
   try {
-    const isInvalid = utils.helper.handleValidation(req);
-    if (isInvalid) {
-      res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ ...baseResponse, ...isInvalid });
-    }
-    const json = await services.sale.getSaleById();
+    const json = await services.sale.getSaleById(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
       code: StatusCodes.OK,
@@ -118,7 +112,7 @@ exports.updateSale = async (req, res) => {
 
 exports.deleteSale = async (req, res) => {
   try {
-    const isInvalid = utils.helper.handleValidation();
+    const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
       res
         .status(StatusCodes.BAD_REQUEST)

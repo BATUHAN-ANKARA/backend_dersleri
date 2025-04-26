@@ -68,7 +68,7 @@ exports.getProductById = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ ...baseResponse, ...isInvalid });
     }
-    const json = await services.product.getProductById();
+    const json = await services.product.getProductById(req);//req isteği yoktu
     res.status(StatusCodes.OK).json({
       ...baseResponse,
       code: StatusCodes.OK,
@@ -118,7 +118,7 @@ exports.getProductByName = async (req, res) => {
 
 exports.getProductsByCategory = async (req, res) => {
   try {
-    const isInvalid = utils.helper.handleValidation();
+    const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
       res
         .status(StatusCodes.BAD_REQUEST)
@@ -185,7 +185,7 @@ exports.getProductsWithStockCategory = async (req, res) => {
       ...baseResponse,
       code: StatusCodes.OK,
       data: json,
-      message: "Güncelleme başarılı",
+      message: "Listeleme başarılı",
       timestamp: new Date(),
     });
   } catch (error) {

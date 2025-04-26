@@ -11,7 +11,7 @@ const categoryValidator = {
   validateGetById() {
     return [
       param("id").not().isEmpty().isMongoId(),
-      param("adminId").not().isEmpty().isMongoId(),
+      // param("adminId").not().isEmpty().isMongoId(), // hata oluşturuyordu!
     ];
   },
   validateDeleteById() {

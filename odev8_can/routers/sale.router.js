@@ -8,7 +8,7 @@ router.post(
   controller.sale.createSale
 );
 router.get("/getAllSales", controller.sale.getAllSales);
-router.get("/getSaleById/:saletId", [validation.saleValidator.validateSaleId()],controller.sale.getSaleById);
+router.get("/getSaleById/:saleId",controller.sale.getSaleById);
 router.put("/updateSale/:saleId",[validation.saleValidator.validateUpdateSale()], controller.sale.updateSale);
 router.delete("/deleteSale/:saleId", controller.sale.deleteSale);
 

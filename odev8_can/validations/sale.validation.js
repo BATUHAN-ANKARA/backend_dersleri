@@ -8,9 +8,6 @@ const saleValidator = {
       body("user").not().isEmpty(),
     ];
   },
-  validateSaleId() {
-    return [param("saleId").not().isEmpty()];
-  },
   validateUpdateSale() {
     return [param("saleId").not().isEmpty()];
   },

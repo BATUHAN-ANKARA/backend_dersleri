@@ -118,12 +118,12 @@ exports.getCategoryById = async (req, res) => {
 
 exports.getCategoriesByStatus = async (req, res) => {
   try {
-    const isInvalid = utils.helper.handleValidation();
+    const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
       res
         .status(StatusCodes.BAD_REQUEST)
         .json({ ...baseResponse, ...isInvalid });
-    }
+    }               
     const json = await services.category.getCategoriesByStatus(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,

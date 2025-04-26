@@ -12,7 +12,7 @@ router.delete(
   [validation.categoryValidator.validateDeleteById()],
   controller.category.deleteCategory
 );
-router.get("/getAllCateories", controller.category.getAllCateories);
+router.get("/getAllCategories", controller.category.getAllCateories);//g eksikti
 router.get(
   "/getCategoryById/:id",
   [validation.categoryValidator.validateGetById()],

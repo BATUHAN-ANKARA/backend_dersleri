@@ -23,7 +23,7 @@ exports.createProduct = async (req) => {
 
 exports.getAllProducts = async () => {
   try {
-    const products = await Product.find({ status: "active" });
+    const products = await Product.find(); // modelde status yoktu status filtresini kaldırdım
     return products;
   } catch (error) {
     throw new Error(error);
@@ -43,7 +43,7 @@ exports.getProductById = async (req) => {
 exports.getProductByName = async (req) => {
   try {
     const { name } = req.params;
-    const product = await Product.find({ name: name, status: "active" });
+    const product = await Product.find({ name: name }); //modelde status yok!
     return product;
   } catch (error) {
     throw new Error(error);
@@ -55,20 +55,20 @@ exports.getProductsByCategory = async (req) => {
     const { category } = req.params;
     const products = await Product.find({
       category: category,
-      status: "active",
     });
+    if (!products.length) {
+      throw new Error("Geçersiz kategori ID'si");
+    }
     return products;
   } catch (error) {
     throw new Error(error);
   }
-};
-
+};// kontrol eklendi 
 
 exports.getProductsWithStock = async () => {
   try {
     const products = await Product.find({
       stock: { $gte: 1 },
-      status: "active",
     });
     return products;
   } catch (error) {
@@ -83,15 +83,16 @@ exports.getProductsWithStockCategory = async (req) => {
       $and: [
         { category: { $eq: category } },
         { stock: { $gte: 1 } },
-        { status: { $eq: "active" } },
       ],
     });
+    if (!products.length) {
+      throw new Error("Geçersiz kategori ID'si");
+    }
     return products;
   } catch (error) {
     throw new Error(error);
   }
 };
-
 
 exports.getProductsPriceGreater = async (req) => {
   try {
@@ -100,7 +101,6 @@ exports.getProductsPriceGreater = async (req) => {
       $and: [
         { price: { $gte: val } },
         { stock: { $gte: 1 } },
-        { status: { $eq: "active" } },
       ],
     });
     return products;
@@ -114,9 +114,8 @@ exports.getProductsPriceRange = async (req) => {
     const { val1, val2 } = req.params;
     const products = await Product.find({
       $and: [
-        { price: { $gte: val1, lte: val2 } },
+        { price: { $gte: val1, $lte: val2 } },//$ eksikti
         { stock: { $gte: 1 } },
-        { status: { $eq: "active" } },
       ],
     });
     return products;

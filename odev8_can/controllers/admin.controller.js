@@ -117,7 +117,7 @@ exports.updateStatus = async (req, res) => {
 
 exports.getAllAdmins = async (req, res) => {
   try {
-    const isInvalid = utils.helper.handleValidation();
+    const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
       res
         .status(StatusCodes.BAD_REQUEST)

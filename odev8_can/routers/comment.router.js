@@ -28,7 +28,8 @@ router.get(
   [validation.commentValidator.validateGetByUser()],
   controller.comment.getCommentsByUser
 );
-router.get("/getFeaturedComments", controller.comment.getFeaturedComments);
+
+router.get("/getFeaturedComments",controller.comment.getFeaturedComments)
 router.put("/updateCommentFeature", controller.comment.updateCommentFeature);
 router.put("/updateCommentStatus", controller.comment.updateCommentStatus);
 

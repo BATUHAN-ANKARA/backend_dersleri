@@ -8,6 +8,7 @@ const saleSchema = new Schema(
       {
         productId: {
           type: Schema.Types.ObjectId,
+          ref:"Product"
         },
         price: {
           type: Number,

@@ -6,7 +6,7 @@ const utils = require("../utils/index");
 exports.createAdmin = async (req) => {
   try {
     const { name, surname, email, password } = req.body;
-    const existAdmin = await Admin.findOne(email);
+    const existAdmin = await Admin.findOne({email:email});//findOne her zaman obje alır süslü eksikti
     if (existAdmin) {
       throw new Error("Bu email zaten kullanımda");
     }
@@ -76,7 +76,7 @@ exports.updateStatus = async (req) => {
   } catch (error) {
     throw new Error(error);
   }
-};
+}; //nasıl çalıştığını anlamadım!!!!!!!!!!!
 
 exports.getAllAdmins = async () => {
   try {
@@ -103,7 +103,7 @@ exports.getAdminById = async (req) => {
 exports.getAdminsByName = async (req) => {
   try {
     const { name } = req.params;
-    const admins = await Admin.find(name);
+    const admins = await Admin.find({name:name});//süslü eksik 
     return admins;
   } catch (error) {
     throw new Error(error);
@@ -118,7 +118,7 @@ exports.getAdminsByStatus = async (req) => {
   } catch (error) {
     throw new Error(error);
   }
-};
+};//paramsa inActive yazdım yine de çalıştı ama modelde inactive ??
 
 exports.deleteAdminById = async (req) => {
   try {

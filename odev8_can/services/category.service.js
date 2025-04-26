@@ -8,8 +8,8 @@ exports.createCategory = async (req) => {
     if (!existAdmin) {
       throw new Error("Admin bulunamadı");
     }
-    const existCategory = await Category.find(name);
-    if (existCategory) {
+    const existCategory = await Category.find({name});//süslü ve if te ! eksik
+    if (!existCategory) {
       throw new Error("Bu kategori zaten mevcut");
     }
     const category = new Category({
@@ -63,14 +63,14 @@ exports.getCategoryById = async (req) => {
 exports.getCategoriesByStatus = async (req) => {
   try {
     const { status } = req.params;
-    const categories = await Category.find(status);
+    const categories = await Category.find({status});//süslü eksik
     return categories;
   } catch (error) {
     throw new Error(error);
   }
 };
 
-exports.getFeaturedCategories = async (req) => {
+exports.getFeaturedCategories = async () => {
   try {
     const categories = await Category.find({ isFeatured: true });
     return categories;
