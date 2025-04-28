@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
-<<<<<<< HEAD
-const Schema = mongoose.Schema;
-=======
 
 const Schema = mongoose.Schema;
 
->>>>>>> 85d947e728a09e885b0882661940307917787dda
+
+const Schema = mongoose.Schema;
+
 const userSchema = new Schema(
   {
     name: {
@@ -32,7 +31,7 @@ const userSchema = new Schema(
   },
   {
     minimize: true,
-<<<<<<< HEAD
+
     timestamps: true, //created ve updateleri otomatik verir
     // _id:false //dökumana id verilmez
   }
@@ -40,7 +39,7 @@ const userSchema = new Schema(
 const User = mongoose.model("User", userSchema, "user");
 module.exports = User;
 //modellerde büyük harfle başlancak const yanındaki yani
-=======
+
     timestamps: true,
   }
 );
@@ -48,4 +47,4 @@ module.exports = User;
 const User = mongoose.model("User", userSchema, "user");
 
 module.exports = User;
->>>>>>> 85d947e728a09e885b0882661940307917787dda
+
