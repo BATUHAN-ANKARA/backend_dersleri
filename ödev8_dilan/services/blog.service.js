@@ -1,21 +1,10 @@
 const Blog = require("../models/blog.model");
 const Admin = require("../models/admin.model");
 
-/*
-createBlog
-deleteBlog
-getAllBlogs
-getBlogById
-getBlogsByTitle
-updateBlogStatus
-getBlogsByAuthor
-getBlogsByStatus
-*/
-
 exports.createBlog = async (req) => {
   try {
     const { title, content, author, tags } = req.body;
-    const existBlog = await Blog.findOne(title);
+    const existBlog = await Blog.findOne({ title }); //süslü eksikk
     if (existBlog) {
       throw new Error("Bu isimde blog zaten mevcut");
     }
@@ -29,6 +18,9 @@ exports.createBlog = async (req) => {
       tags,
       author,
     });
+    admin.blogs.push({ blogId: blog._id });
+    await admin.save(); //admin şemasında ki blog arrayine kayıt etmek için kod eklendi
+
     await blog.save();
     return blog;
   } catch (error) {
@@ -39,11 +31,24 @@ exports.createBlog = async (req) => {
 exports.deleteBlog = async (req) => {
   try {
     const { id } = req.params;
+
     const existBlog = await Blog.findById(id);
     if (!existBlog) {
       throw new Error("Blog bulunamadı");
     }
+
+    const admin = await Admin.findById(existBlog.author);
+    if (!admin) {
+      throw new Error("Admin bulunamadı");
+    }
+
+    admin.blogs = admin.blogs.filter(
+      (blogItem) => blogItem.blogId.toString() !== id
+    );
+    await admin.save(); //admin modelinde blogs arrayden çıkarmak için kod eklendi
+
     await Blog.findByIdAndDelete(id);
+
     return "Blog silindi";
   } catch (error) {
     throw new Error(error);
@@ -62,6 +67,10 @@ exports.getAllBlogs = async () => {
 exports.getBlogById = async (req) => {
   try {
     const { id } = req.params;
+    const existBlog = await Blog.findById(id);
+    if (!existBlog) {
+      throw new Error("Blog bulunamadı");
+    }
     const blog = await Blog.findById(id);
     return blog;
   } catch (error) {
@@ -72,7 +81,11 @@ exports.getBlogById = async (req) => {
 exports.getBlogByTitle = async (req) => {
   try {
     const { title } = req.params;
-    const blog = await Blog.find(title);
+
+    const blog = await Blog.find({ title });
+    if (blog.length === 0) {
+      throw new Error("Blog bulunamadı");
+    }
     return blog;
   } catch (error) {
     throw new Error(error);
@@ -86,7 +99,7 @@ exports.getBlogsByAuthor = async (req) => {
     if (!admin) {
       throw new Error("Yazar bulunamadı");
     }
-    const blogs = await Blog.find(author);
+    const blogs = await Blog.find({ author });
     return blogs;
   } catch (error) {
     throw new Error(error);
@@ -96,7 +109,11 @@ exports.getBlogsByAuthor = async (req) => {
 exports.getBlogsByStatus = async (req) => {
   try {
     const { status } = req.params;
-    const blogs = await Blog.find(status);
+
+    const blogs = await Blog.find({status});//süslü ve kontrol
+    if (blogs.length === 0) {
+      throw new Error("Blog bulunamadı");
+    }
     return blogs;
   } catch (error) {
     throw new Error(error);

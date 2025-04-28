@@ -2,7 +2,7 @@ const Product = require("../models/product.model");
 
 exports.createProduct = async (req) => {
   try {
-    const { name, price, stock, category, subCategory } = req.body;
+    const { name, price, stock, category, description } = req.body;
     const existProduct = await Product.findOne({ name: name });
     if (existProduct) {
       throw new Error("Bu ürün zaten var");
@@ -11,7 +11,7 @@ exports.createProduct = async (req) => {
       name,
       price,
       category,
-      subCategory,
+      description,
       stock,
     });
     await product.save();
@@ -21,9 +21,9 @@ exports.createProduct = async (req) => {
   }
 };
 
-exports.getAllProducts = async (req) => {
+exports.getAllProducts = async () => {
   try {
-    const products = await Product.find({ status: "active" });
+    const products = await Product.find();
     return products;
   } catch (error) {
     throw new Error(error);
@@ -43,7 +43,7 @@ exports.getProductById = async (req) => {
 exports.getProductByName = async (req) => {
   try {
     const { name } = req.params;
-    const product = await Product.find({ name: name, status: "active" });
+    const product = await Product.find({ name: name });
     return product;
   } catch (error) {
     throw new Error(error);
@@ -55,32 +55,19 @@ exports.getProductsByCategory = async (req) => {
     const { category } = req.params;
     const products = await Product.find({
       category: category,
-      status: "active",
     });
+    if (!products.length) {
+      throw new Error("Geçersiz kategori ID'si");
+    }
     return products;
   } catch (error) {
     throw new Error(error);
   }
 };
-
-exports.getProductsBySubCategory = async (req) => {
-  try {
-    const { subCategory } = req.params;
-    const products = await Product.find({
-      subCategory: subCategory,
-      status: "active",
-    });
-    return products;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-exports.getProductsWithStock = async (req) => {
+exports.getProductsWithStock = async () => {
   try {
     const products = await Product.find({
       stock: { $gte: 1 },
-      status: "active",
     });
     return products;
   } catch (error) {
@@ -92,28 +79,11 @@ exports.getProductsWithStockCategory = async (req) => {
   try {
     const { category } = req.params;
     const products = await Product.find({
-      $and: [
-        { category: { $eq: category } },
-        { stock: { $gte: 1 } },
-        { status: { $eq: "active" } },
-      ],
+      $and: [{ category: { $eq: category } }, { stock: { $gte: 1 } }],
     });
-    return products;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-exports.getProductsWithStockSubCategory = async (req) => {
-  try {
-    const { subCategory } = req.params;
-    const products = await Product.find({
-      $and: [
-        { subCategory: { $eq: subCategory } },
-        { stock: { $gte: 1 } },
-        { status: { $eq: "active" } },
-      ],
-    });
+    if (!products.length) {
+      throw new Error("Geçersiz kategori ID'si");
+    }
     return products;
   } catch (error) {
     throw new Error(error);
@@ -124,11 +94,7 @@ exports.getProductsPriceGreater = async (req) => {
   try {
     const { val } = req.params;
     const products = await Product.find({
-      $and: [
-        { price: { $gte: val } },
-        { stock: { $gte: 1 } },
-        { status: { $eq: "active" } },
-      ],
+      $and: [{ price: { $gte: val } }, { stock: { $gte: 1 } }],
     });
     return products;
   } catch (error) {
@@ -140,11 +106,7 @@ exports.getProductsPriceRange = async (req) => {
   try {
     const { val1, val2 } = req.params;
     const products = await Product.find({
-      $and: [
-        { price: { $gte: val1, lte: val2 } },
-        { stock: { $gte: 1 } },
-        { status: { $eq: "active" } },
-      ],
+      $and: [{ price: { $gte: val1, $lte: val2 } }, { stock: { $gte: 1 } }],
     });
     return products;
   } catch (error) {

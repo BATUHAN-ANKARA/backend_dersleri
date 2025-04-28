@@ -1,17 +1,6 @@
 const Category = require("../models/category.model");
 const Admin = require("../models/admin.model");
 
-/*
-createCategory
-deleteCategory
-getAllCateories
-getCategoryById
-getFeaturedCategories
-updateCategoryStatus
-getCategoriesByStatus
-updateCategoryFeature
-*/
-
 exports.createCategory = async (req) => {
   try {
     const { name, description, adminId } = req.body;
@@ -19,8 +8,8 @@ exports.createCategory = async (req) => {
     if (!existAdmin) {
       throw new Error("Admin bulunamadı");
     }
-    const existCategory = await Category.find(name);
-    if (existCategory) {
+    const existCategory = await Category.find({name});//süslü ve if te ! eksik
+    if (!existCategory) {
       throw new Error("Bu kategori zaten mevcut");
     }
     const category = new Category({
@@ -74,7 +63,7 @@ exports.getCategoryById = async (req) => {
 exports.getCategoriesByStatus = async (req) => {
   try {
     const { status } = req.params;
-    const categories = await Category.find(status);
+    const categories = await Category.find({status});//süslü eksik
     return categories;
   } catch (error) {
     throw new Error(error);

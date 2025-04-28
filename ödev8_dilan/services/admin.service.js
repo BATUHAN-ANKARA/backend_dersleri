@@ -1,22 +1,10 @@
 const Admin = require("../models/admin.model");
 const utils = require("../utils/index");
 
-/*
-createAdmin
-loginAdmin
-changePassword
-updateStatus
-getAll
-getById
-getByName
-getActive/Inactive/Pending
-deleteById
-*/
-
 exports.createAdmin = async (req) => {
   try {
     const { name, surname, email, password } = req.body;
-    const existAdmin = await Admin.findOne(email);
+    const existAdmin = await Admin.findOne({ email: email });
     if (existAdmin) {
       throw new Error("Bu email zaten kullanımda");
     }
@@ -77,6 +65,7 @@ exports.updateStatus = async (req) => {
     if (!existAdmin) {
       throw new Error("Admin bulunamadı");
     }
+
     const updatedAdmin = await Admin.findByIdAndUpdate(
       id,
       { status: status },
@@ -113,7 +102,7 @@ exports.getAdminById = async (req) => {
 exports.getAdminsByName = async (req) => {
   try {
     const { name } = req.params;
-    const admins = await Admin.find(name);
+    const admins = await Admin.find({ name: name });
     return admins;
   } catch (error) {
     throw new Error(error);
@@ -123,6 +112,7 @@ exports.getAdminsByName = async (req) => {
 exports.getAdminsByStatus = async (req) => {
   try {
     const { status } = req.params;
+
     const admins = await Admin.find({ status: status });
     return admins;
   } catch (error) {
