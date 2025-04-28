@@ -21,6 +21,8 @@ backend_dersleri/
 │   ├── services/         # Servis katmanındaki yardımcı fonksiyonlar
 │   ├── utils/            # Yardımcı araçlar ve fonksiyonlar
 │   ├── validations/      # Veri doğrulama kuralları
+│   ├── logs/             # Veri doğrulama kuralları
+│   ├── middlewares/      # Veri doğrulama kuralları
 │── .env                  # Ortam değişkenlerini içeren dosya
 │── package.json          # Bağımlılıkları ve scriptleri tanımlayan dosya
 │── server.js             # Express.js uygulamasının başlangıç dosyası
@@ -81,6 +83,13 @@ Bu projede **Node.js** ile backend geliştirme yapılırken aşağıdaki popüle
 | `md5` | Kullanıcı verilerini güvenli bir şekilde şifrelemek için kullanılır. |
 | `http-status-codes` | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
 | `express-validator` | Gelen istekleri doğrulamak için kullanılır. |
+| `winston` | Gelen istekleri doğrulamak için kullanılır. |
+| `winston-daily-rotate-file` | Gelen istekleri doğrulamak için kullanılır. |
+| `node-telegram-bot-api` | Gelen istekleri doğrulamak için kullanılır. |
+| `telegraf` | Gelen istekleri doğrulamak için kullanılır. |
+| `jsonwebtoken` | Gelen istekleri doğrulamak için kullanılır. |
+| `cors` | Gelen istekleri doğrulamak için kullanılır. |
+| `multer` | Gelen istekleri doğrulamak için kullanılır. |
 
 ## 💻 Terminal Komutları
 
