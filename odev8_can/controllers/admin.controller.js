@@ -68,7 +68,20 @@ exports.changePassword = async (req, res) => {
         .json({ ...baseResponse, ...isInvalid });
     }
     const json = await services.admin.changePassword(req);
-    res.status(StatusCodes.OK).json({
+    if (json && json.message) {
+      if (json && json.message) {
+        return res.status(StatusCodes.FORBIDDEN).json({
+          ...baseResponse,
+          code: StatusCodes.FORBIDDEN,
+          success: false,
+          error: false,
+          message: json.message,
+          timestamp: new Date(),
+        });
+      }
+    }
+
+    return res.status(StatusCodes.OK).json({
       ...baseResponse,
       code: StatusCodes.OK,
       data: json,

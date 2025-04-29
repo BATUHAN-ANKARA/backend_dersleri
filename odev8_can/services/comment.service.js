@@ -101,7 +101,7 @@ exports.getCommentsByUser = async (req) => {
     if (!existUser) {
       throw new Error("Kullanıcı bulunamadı");
     }
-    const comments = await Comment.find({userId});
+    const comments = await Comment.find({ userId });
     return comments;
   } catch (error) {
     throw new Error(error);
@@ -115,7 +115,7 @@ exports.getCommentsByProduct = async (req) => {
     if (!existProduct) {
       throw new Error("Ürün bulunamadı");
     }
-    const comments = await Comment.find({productId});
+    const comments = await Comment.find({ productId });
     return comments;
   } catch (error) {
     throw new Error(error);
@@ -156,14 +156,15 @@ exports.updateCommentStatus = async (req) => {
 exports.updateCommentFeature = async (req) => {
   try {
     const { id, status, adminId } = req.params;
-    const existComment = await Comment.findById(id);
-    if (!existComment) {
-      throw new Error("Yorum bulunamadı");
-    }
     const existAdmin = await Admin.findById(adminId);
     if (!existAdmin) {
       throw new Error("Admin bulunamadı");
     }
+    const existComment = await Comment.findById(id);
+    if (!existComment) {
+      throw new Error("Yorum bulunamadı");
+    }
+
     const updatedComment = await Comment.findByIdAndUpdate(
       id,
       { isFeatured: status },
@@ -174,6 +175,3 @@ exports.updateCommentFeature = async (req) => {
     throw new Error(error);
   }
 };
-
-
-//son 2 api çalışmıyor !!!!

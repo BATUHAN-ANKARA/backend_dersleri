@@ -30,8 +30,8 @@ router.get(
 );
 
 router.get("/getFeaturedComments",controller.comment.getFeaturedComments)
-router.put("/updateCommentFeature", controller.comment.updateCommentFeature);
-router.put("/updateCommentStatus", controller.comment.updateCommentStatus);
+router.put("/updateCommentFeature/:id/:status/:adminId", controller.comment.updateCommentFeature);
+router.put("/updateCommentStatus/:id/:status/:adminId", controller.comment.updateCommentStatus);
 
 module.exports = {
   comment: router,

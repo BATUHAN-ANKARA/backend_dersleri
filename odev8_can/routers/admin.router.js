@@ -17,7 +17,7 @@ router.put(
   [validation.adminValidator.validateChangePassword()],
   controller.admin.changePassword
 );
-router.put("/updateStatus/:id/:status", controller.admin.updateStatus);
+router.put("/updateStatus/:id/:status/:adminId", controller.admin.updateStatus);
 router.get("/getAllAdmins", controller.admin.getAllAdmins);
 router.get(
   "/getAdminById/:id",
