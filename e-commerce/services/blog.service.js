@@ -4,7 +4,7 @@ const Admin = require("../models/admin.model");
 exports.createBlog = async (req) => {
   try {
     const { title, content, author, tags } = req.body;
-    const existBlog = await Blog.findOne({ title }); //süslü eksikk
+    const existBlog = await Blog.findOne({ title }); 
     if (existBlog) {
       throw new Error("Bu isimde blog zaten mevcut");
     }
@@ -19,7 +19,7 @@ exports.createBlog = async (req) => {
       author,
     });
     admin.blogs.push({ blogId: blog._id });
-    await admin.save(); //admin şemasında ki blog arrayine kayıt etmek için kod eklendi
+    await admin.save(); 
 
     await blog.save();
     return blog;
@@ -45,7 +45,7 @@ exports.deleteBlog = async (req) => {
     admin.blogs = admin.blogs.filter(
       (blogItem) => blogItem.blogId.toString() !== id
     );
-    await admin.save(); //admin modelinde blogs arrayden çıkarmak için kod eklendi
+    await admin.save(); 
 
     await Blog.findByIdAndDelete(id);
 
@@ -110,7 +110,7 @@ exports.getBlogsByStatus = async (req) => {
   try {
     const { status } = req.params;
 
-    const blogs = await Blog.find({status});//süslü ve kontrol
+    const blogs = await Blog.find({status});
     if (blogs.length === 0) {
       throw new Error("Blog bulunamadı");
     }
