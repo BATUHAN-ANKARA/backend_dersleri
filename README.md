@@ -242,7 +242,7 @@ If you would like to contribute, please follow these steps:
 
 ## 📄 License
 
-This project is licensed under the **MIT License**. See the `LICENSE` file for more details.
+This project is licensed under the **MIT License**. See the [LICENSE](https://choosealicense.com/licenses/mit/) file for more details.
 
 ## 📧 Contact
 
