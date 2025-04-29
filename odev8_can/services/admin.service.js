@@ -80,7 +80,7 @@ exports.updateStatus = async (req) => {
     const { id, status, adminId } = req.params;
     if (!["pending", "active", "inactive"].includes(status)) {
       throw new Error("Geçersiz status değeri");
-    }// bunu eklemek gerekiyormuş dmongoosede params ve bodyden gelenler kontrol edilmiyormuş!!!!!
+    }// bunu eklemeseydim paramsta status yerine ne verirsem kabul ediyordu mongoose params ve body kontrolü yapmıyor !!!!
     const admin = await Admin.findById(id);
     if (!admin) {
       throw new Error("Statusu güncellenecek admin bulunamadı");

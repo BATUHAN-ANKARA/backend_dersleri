@@ -12,21 +12,22 @@ Proje aşağıdaki klasör ve dosya yapısına sahiptir:
 ```
 backend_dersleri/
 
-│   ├── configs/          # Konfigürasyon dosyaları ve ortam ayarları
-│   ├── controllers/      # İş mantığını yöneten controller dosyaları
-│   ├── db/               # Veritabanı bağlantı işlemleri
-│   ├── dto/              # Veri transfer objeleri
-│   ├── models/           # MongoDB şemalarının bulunduğu model dosyaları
-│   ├── routers/          # API yönlendirmelerini yöneten route dosyaları
-│   ├── services/         # Servis katmanındaki yardımcı fonksiyonlar
-│   ├── utils/            # Yardımcı araçlar ve fonksiyonlar
-│   ├── validations/      # Veri doğrulama kuralları
-│   ├── logs/             # Veri doğrulama kuralları
-│   ├── middlewares/      # Veri doğrulama kuralları
-│── .env                  # Ortam değişkenlerini içeren dosya
-│── package.json          # Bağımlılıkları ve scriptleri tanımlayan dosya
-│── server.js             # Express.js uygulamasının başlangıç dosyası
-│── README.md             # Proje hakkında bilgiler
+│   ├── configs/          # Konfigürasyon dosyaları ve ortam ayarları  
+│   ├── controllers/      # İş mantığını yöneten controller dosyaları  
+│   ├── db/               # Veritabanı bağlantı işlemleri  
+│   ├── dto/              # Veri transfer objeleri  
+│   ├── logs/             # Uygulama loglarının tutulduğu dosyalar  
+│   ├── middlewares/      # Ara katman yazılımları (middleware)  
+│   ├── models/           # MongoDB şemalarının bulunduğu model dosyaları  
+│   ├── routers/          # API yönlendirmelerini yöneten route dosyaları  
+│   ├── services/         # Servis katmanındaki yardımcı fonksiyonlar  
+│   ├── utils/            # Yardımcı araçlar ve fonksiyonlar  
+│   ├── validations/      # Veri doğrulama kuralları  
+│── .env                  # Ortam değişkenlerini içeren dosya  
+│── package.json          # Bağımlılıkları ve scriptleri tanımlayan dosya  
+│── README.md             # Proje hakkında bilgiler  
+│── server.js             # Express.js uygulamasının başlangıç dosyası  
+
 ```
 
 ## 📥 Kurulum
@@ -82,14 +83,14 @@ Bu projede **Node.js** ile backend geliştirme yapılırken aşağıdaki popüle
 | `mongoose` | MongoDB ile etkileşim için kullanılan güçlü bir ODM kütüphanesidir. |
 | `md5` | Kullanıcı verilerini güvenli bir şekilde şifrelemek için kullanılır. |
 | `http-status-codes` | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
-| `express-validator` | Gelen istekleri doğrulamak için kullanılır. |
-| `winston` | Gelen istekleri doğrulamak için kullanılır. |
-| `winston-daily-rotate-file` | Gelen istekleri doğrulamak için kullanılır. |
-| `node-telegram-bot-api` | Gelen istekleri doğrulamak için kullanılır. |
-| `telegraf` | Gelen istekleri doğrulamak için kullanılır. |
-| `jsonwebtoken` | Gelen istekleri doğrulamak için kullanılır. |
-| `cors` | Gelen istekleri doğrulamak için kullanılır. |
-| `multer` | Gelen istekleri doğrulamak için kullanılır. |
+| `express-validator` | Gelen HTTP isteklerindeki verileri doğrulamak ve filtrelemek için kullanılır. |
+| `winston` | Uygulama loglarını yönetmek ve dışa aktarmak için kullanılan esnek bir loglama kütüphanesidir. |
+| `winston-daily-rotate-file` | Winston ile günlük olarak dönen log dosyaları oluşturmak için kullanılır. |
+| `node-telegram-bot-api` | Telegram botları oluşturmak ve yönetmek için kullanılan bir API kütüphanesidir. |
+| `telegraf` | Telegram botları geliştirmek için kullanılan modern ve güçlü bir framework’tür. |
+| `jsonwebtoken` | JWT (JSON Web Token) oluşturmak ve doğrulamak için kullanılır. |
+| `cors` | Farklı origin’lerden gelen isteklere izin vermek için kullanılır (Cross-Origin Resource Sharing). |
+| `multer` | HTTP istekleri üzerinden gelen dosya yüklemelerini yönetmek için kullanılır. |
 
 ## 💻 Terminal Komutları
 
@@ -134,18 +135,20 @@ The project has the following folder and file structure:
 backend_lessons/
 
 │   ├── configs/          # Configuration files and environment settings  
-│   ├── controllers/      # Controller files managing business logic  
-│   ├── db/               # Database connection logic  
+│   ├── controllers/      # Controller files that handle business logic  
+│   ├── db/               # Database connection and setup  
 │   ├── dto/              # Data Transfer Objects  
-│   ├── models/           # Model files containing MongoDB schemas  
-│   ├── routers/          # Route files managing API endpoints  
-│   ├── services/         # Service layer and helper functions  
-│   ├── utils/            # Utility functions and helper tools  
+│   ├── logs/             # Application log files  
+│   ├── middlewares/      # Middleware functions  
+│   ├── models/           # Mongoose schema and model definitions  
+│   ├── routers/          # Route files that handle API routing  
+│   ├── services/         # Service layer helper functions  
+│   ├── utils/            # Utility functions and helpers  
 │   ├── validations/      # Data validation rules  
 │── .env                  # File containing environment variables  
-│── package.json          # File defining dependencies and scripts  
+│── package.json          # Project dependencies and scripts  
+│── README.md             # Project information and documentation  
 │── server.js             # Entry point of the Express.js application  
-│── README.md             # Project documentation  
 ```
 
 ## 📥 Installation
@@ -182,6 +185,26 @@ To install the project locally, follow these steps:
    ```bash
    npm start or yarn start
    ```
+## 🚀 Technologies Used
+
+In this project, **Node.js** was used for backend development along with the following popular libraries:
+
+| 📦 Package | 📌 Description |
+|-----------|----------------|
+| `express` | A minimalist and fast web framework. Ideal for API development. |
+| `nodemon` | Automatically restarts the server when code changes during development. |
+| `dotenv` | Used to manage environment variables. |
+| `mongoose` | A powerful ODM library used to interact with MongoDB. |
+| `md5` | Used to securely hash user data. |
+| `http-status-codes` | Makes HTTP status and error codes more readable. |
+| `express-validator` | Used to validate and sanitize incoming HTTP request data. |
+| `winston` | A flexible logging library used to manage application logs. |
+| `winston-daily-rotate-file` | Used with Winston to create daily rotating log files. |
+| `node-telegram-bot-api` | A library to create and manage Telegram bots via the Telegram Bot API. |
+| `telegraf` | A modern and powerful framework for developing Telegram bots. |
+| `jsonwebtoken` | Used to generate and verify JWT (JSON Web Tokens). |
+| `cors` | Allows cross-origin requests (Cross-Origin Resource Sharing). |
+| `multer` | Used to handle file uploads via HTTP requests. |
 
 ## 🚀 Usage
 
