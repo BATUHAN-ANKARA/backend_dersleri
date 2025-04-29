@@ -76,21 +76,22 @@ npm start veya yarn start
 Bu projede **Node.js** ile backend geliştirme yapılırken aşağıdaki popüler kütüphaneler kullanılmıştır:
 
 | 📦 Paket | 📌 Açıklama |
-|-------|---------|
-| `express` | Minimalist ve hızlı bir web çatısıdır. API geliştirme için idealdir. |
-| `nodemon` | Geliştirme sırasında kod değiştiğinde sunucuyu otomatik yeniden başlatır. |
-| `dotenv` | Ortam değişkenlerini yönetmek için kullanılır. |
-| `mongoose` | MongoDB ile etkileşim için kullanılan güçlü bir ODM kütüphanesidir. |
-| `md5` | Kullanıcı verilerini güvenli bir şekilde şifrelemek için kullanılır. |
-| `http-status-codes` | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
-| `express-validator` | Gelen HTTP isteklerindeki verileri doğrulamak ve filtrelemek için kullanılır. |
-| `winston` | Uygulama loglarını yönetmek ve dışa aktarmak için kullanılan esnek bir loglama kütüphanesidir. |
-| `winston-daily-rotate-file` | Winston ile günlük olarak dönen log dosyaları oluşturmak için kullanılır. |
-| `node-telegram-bot-api` | Telegram botları oluşturmak ve yönetmek için kullanılan bir API kütüphanesidir. |
-| `telegraf` | Telegram botları geliştirmek için kullanılan modern ve güçlü bir framework’tür. |
-| `jsonwebtoken` | JWT (JSON Web Token) oluşturmak ve doğrulamak için kullanılır. |
-| `cors` | Farklı origin’lerden gelen isteklere izin vermek için kullanılır (Cross-Origin Resource Sharing). |
-| `multer` | HTTP istekleri üzerinden gelen dosya yüklemelerini yönetmek için kullanılır. |
+|---------|-------------|
+| [`express`](https://www.npmjs.com/package/express) | Minimalist ve hızlı bir web çatısıdır. API geliştirme için idealdir. |
+| [`nodemon`](https://www.npmjs.com/package/nodemon) | Geliştirme sırasında kod değiştiğinde sunucuyu otomatik yeniden başlatır. |
+| [`dotenv`](https://www.npmjs.com/package/dotenv) | Ortam değişkenlerini yönetmek için kullanılır. |
+| [`mongoose`](https://www.npmjs.com/package/mongoose) | MongoDB ile etkileşim için kullanılan güçlü bir ODM kütüphanesidir. |
+| [`md5`](https://www.npmjs.com/package/md5) | Kullanıcı verilerini güvenli bir şekilde şifrelemek için kullanılır. |
+| [`http-status-codes`](https://www.npmjs.com/package/http-status-codes) | HTTP hata ve durum kodlarını daha okunabilir hale getirmek için kullanılır. |
+| [`express-validator`](https://www.npmjs.com/package/express-validator) | Gelen HTTP isteklerindeki verileri doğrulamak ve filtrelemek için kullanılır. |
+| [`winston`](https://www.npmjs.com/package/winston) | Uygulama loglarını yönetmek ve dışa aktarmak için kullanılan esnek bir loglama kütüphanesidir. |
+| [`winston-daily-rotate-file`](https://www.npmjs.com/package/winston-daily-rotate-file) | Winston ile günlük olarak dönen log dosyaları oluşturmak için kullanılır. |
+| [`node-telegram-bot-api`](https://www.npmjs.com/package/node-telegram-bot-api) | Telegram botları oluşturmak ve yönetmek için kullanılan bir API kütüphanesidir. |
+| [`telegraf`](https://www.npmjs.com/package/telegraf) | Telegram botları geliştirmek için kullanılan modern ve güçlü bir framework’tür. |
+| [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken) | JWT (JSON Web Token) oluşturmak ve doğrulamak için kullanılır. |
+| [`cors`](https://www.npmjs.com/package/cors) | Farklı origin’lerden gelen isteklere izin vermek için kullanılır (Cross-Origin Resource Sharing). |
+| [`multer`](https://www.npmjs.com/package/multer) | HTTP istekleri üzerinden gelen dosya yüklemelerini yönetmek için kullanılır. |
+
 
 ## 💻 Terminal Komutları
 
@@ -191,20 +192,21 @@ In this project, **Node.js** was used for backend development along with the fol
 
 | 📦 Package | 📌 Description |
 |-----------|----------------|
-| `express` | A minimalist and fast web framework. Ideal for API development. |
-| `nodemon` | Automatically restarts the server when code changes during development. |
-| `dotenv` | Used to manage environment variables. |
-| `mongoose` | A powerful ODM library used to interact with MongoDB. |
-| `md5` | Used to securely hash user data. |
-| `http-status-codes` | Makes HTTP status and error codes more readable. |
-| `express-validator` | Used to validate and sanitize incoming HTTP request data. |
-| `winston` | A flexible logging library used to manage application logs. |
-| `winston-daily-rotate-file` | Used with Winston to create daily rotating log files. |
-| `node-telegram-bot-api` | A library to create and manage Telegram bots via the Telegram Bot API. |
-| `telegraf` | A modern and powerful framework for developing Telegram bots. |
-| `jsonwebtoken` | Used to generate and verify JWT (JSON Web Tokens). |
-| `cors` | Allows cross-origin requests (Cross-Origin Resource Sharing). |
-| `multer` | Used to handle file uploads via HTTP requests. |
+| [`express`](https://www.npmjs.com/package/express) | A minimalist and fast web framework. Ideal for API development. |
+| [`nodemon`](https://www.npmjs.com/package/nodemon) | Automatically restarts the server when code changes during development. |
+| [`dotenv`](https://www.npmjs.com/package/dotenv) | Used to manage environment variables. |
+| [`mongoose`](https://www.npmjs.com/package/mongoose) | A powerful ODM library used to interact with MongoDB. |
+| [`md5`](https://www.npmjs.com/package/md5) | Used to securely hash user data. |
+| [`http-status-codes`](https://www.npmjs.com/package/http-status-codes) | Makes HTTP status and error codes more readable. |
+| [`express-validator`](https://www.npmjs.com/package/express-validator) | Used to validate and sanitize incoming HTTP request data. |
+| [`winston`](https://www.npmjs.com/package/winston) | A flexible logging library used to manage application logs. |
+| [`winston-daily-rotate-file`](https://www.npmjs.com/package/winston-daily-rotate-file) | Used with Winston to create daily rotating log files. |
+| [`node-telegram-bot-api`](https://www.npmjs.com/package/node-telegram-bot-api) | A library to create and manage Telegram bots via the Telegram Bot API. |
+| [`telegraf`](https://www.npmjs.com/package/telegraf) | A modern and powerful framework for developing Telegram bots. |
+| [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken) | Used to generate and verify JWT (JSON Web Tokens). |
+| [`cors`](https://www.npmjs.com/package/cors) | Allows cross-origin requests (Cross-Origin Resource Sharing). |
+| [`multer`](https://www.npmjs.com/package/multer) | Used to handle file uploads via HTTP requests. |
+
 
 ## 💻 Terminal Commands
 
