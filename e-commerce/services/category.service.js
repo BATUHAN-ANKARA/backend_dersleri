@@ -8,7 +8,7 @@ exports.createCategory = async (req) => {
     if (!existAdmin) {
       throw new Error("Admin bulunamadı");
     }
-    const existCategory = await Category.find({name});//süslü ve if te ! eksik
+    const existCategory = await Category.find({name});
     if (!existCategory) {
       throw new Error("Bu kategori zaten mevcut");
     }
@@ -63,7 +63,7 @@ exports.getCategoryById = async (req) => {
 exports.getCategoriesByStatus = async (req) => {
   try {
     const { status } = req.params;
-    const categories = await Category.find({status});//süslü eksik
+    const categories = await Category.find({status});
     return categories;
   } catch (error) {
     throw new Error(error);
