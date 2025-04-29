@@ -206,6 +206,25 @@ In this project, **Node.js** was used for backend development along with the fol
 | `cors` | Allows cross-origin requests (Cross-Origin Resource Sharing). |
 | `multer` | Used to handle file uploads via HTTP requests. |
 
+## 💻 Terminal Commands
+
+Below are commonly used **Git and Node.js** commands in the project:
+
+| ⌨️ Command | 📌 Description |
+|-----------|----------------|
+| `git init` | Initializes a new Git repository. |
+| `git clone [URL]` | Clones an existing repository to your local machine. |
+| `git add .` | Stages all changes for the next commit. |
+| `git commit -m "Message"` | Records the staged changes with a message. |
+| `git push origin main` | Pushes your changes to the remote repository. |
+| `git pull origin main` | Pulls the latest changes from the remote repository. |
+| `npm install` | Installs project dependencies. |
+| `npm start` | Starts the application. |
+| `yarn start` | Starts the application (if using Yarn). |
+| `yarn` | Installs project dependencies using Yarn. |
+
+**⚠️ Tip:** Before pushing your changes, make sure to run `git pull origin main` to get the latest updates from the remote repository!
+
 ## 🚀 Usage
 
 After running the server, the API will be available at `http://localhost:3000`. 
