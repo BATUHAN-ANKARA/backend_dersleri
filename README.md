@@ -112,6 +112,21 @@ Aşağıda projede sıkça kullanılan **Git ve Node.js** komutları verilmişti
 
 **⚠️ Öneri:** Değişiklikleri uzak depoya göndermeden önce `git pull origin main` komutuyla en güncel değişiklikleri aldığınızdan emin olun!
 
+## 🚀 Kullanım
+
+Sunucuyu çalıştırdıktan sonra API `http://localhost:3000` adresinde kullanılabilir olacaktır. 
+Endpoint'leri **Postman** veya **cURL** gibi araçlar kullanarak test edebilirsiniz.
+
+## 🤝 Katkıda Bulunma
+
+Katkıda bulunmak istiyorsanız, lütfen aşağıdaki adımları izleyin:
+
+1. Depoyu fork'layın.
+2. Yeni bir dal oluşturun (`git checkout -b ozellik-dali`).
+3. Değişikliklerinizi yapın ve commit'leyin (`git commit -m "Yeni özellik eklendi"`).
+4. Dalı gönderin (`git push origin ozellik-dali`).
+5. Bir pull request açın.
+
 ## 📜 Lisans
 
 Bu proje **MIT Lisansı** ile lisanslanmıştır. Daha fazla bilgi için [MIT Lisansı](https://choosealicense.com/licenses/mit/) bağlantısını ziyaret edebilirsiniz.
