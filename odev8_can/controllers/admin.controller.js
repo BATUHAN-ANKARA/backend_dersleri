@@ -10,6 +10,7 @@ exports.createAdmin = async (req, res) => {
       res
         .status(StatusCodes.BAD_REQUEST)
         .json({ ...baseResponse, ...isInvalid });
+      return;
     }
     const json = await services.admin.createAdmin(req);
     res.status(StatusCodes.CREATED).json({
@@ -68,17 +69,16 @@ exports.changePassword = async (req, res) => {
         .json({ ...baseResponse, ...isInvalid });
     }
     const json = await services.admin.changePassword(req);
-    if (json && json.message) {
-      if (json && json.message) {
-        return res.status(StatusCodes.FORBIDDEN).json({
-          ...baseResponse,
-          code: StatusCodes.FORBIDDEN,
-          success: false,
-          error: false,
-          message: json.message,
-          timestamp: new Date(),
-        });
-      }
+
+    if (json.warn) {
+      return res.status(StatusCodes.FORBIDDEN).json({
+        ...baseResponse,
+        code: StatusCodes.FORBIDDEN,
+        success: false,
+        error: false,
+        message: json.warn,
+        timestamp: new Date(),
+      });
     }
 
     return res.status(StatusCodes.OK).json({
@@ -135,6 +135,7 @@ exports.getAllAdmins = async (req, res) => {
       res
         .status(StatusCodes.BAD_REQUEST)
         .json({ ...baseResponse, ...isInvalid });
+        
     }
     const json = await services.admin.getAllAdmins(req);
     res.status(StatusCodes.OK).json({

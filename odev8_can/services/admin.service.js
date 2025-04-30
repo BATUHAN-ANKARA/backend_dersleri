@@ -52,7 +52,7 @@ exports.changePassword = async (req) => {
     }
     if (existAdmin.status === "pending") {
       return {
-        message:
+        warn:
           "Şifre değiştirebilmek için aktif bir admin olmanız gerekiyor.",
       };
     }
