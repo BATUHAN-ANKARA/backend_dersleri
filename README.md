@@ -133,7 +133,7 @@ Bu proje **MIT Lisansı** ile lisanslanmıştır. Daha fazla bilgi için [MIT Li
 
 ## 📧 İletişim
 
-Herhangi bir sorunuz varsa, bizimle e-posta yoluyla iletişime geçmekten çekinmeyin: **contact@example.com**.
+Herhangi bir sorunuz varsa, bizimle e-posta yoluyla iletişime geçmekten çekinmeyin: **bthnankara@gmail.com**.
 
 Keyifli kodlamalar! 🚀
 
@@ -268,6 +268,6 @@ This project is licensed under the **MIT License**. See the [LICENSE](https://ch
 
 ## 📧 Contact
 
-If you have any questions, feel free to contact us via email: **contact@example.com**.
+If you have any questions, feel free to contact us via email: **bthnankara@gmail.com**.
 
 Happy coding! 🚀
