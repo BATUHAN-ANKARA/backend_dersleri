@@ -7,18 +7,21 @@ const studentValidation = require("../validations/student.validation");
 router.post(
   "/createStudent",
   [studentValidation.validateCreateStudent()],
+  
   studentController.createStudent
 );
 
 router.put(
   "/updateStudent/:studentId",
   [studentValidation.validateUpdateStudent()],
+  
   studentController.updateStudent
 );
 
 router.delete(
   "/deleteStudent/:studentId",
   [studentValidation.validateDeleteStudent()],
+  
   studentController.deleteStudent
 );
 
@@ -30,6 +33,7 @@ router.get(
 router.get(
   "/getStudentById/:studentId",
   [studentValidation.validateGetStudentById()],
+  
   studentController.getStudentById
 );
 

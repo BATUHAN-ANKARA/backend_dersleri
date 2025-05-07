@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Telegraf, Markup } = require("telegraf");
+const Product = require("../models/product.model");
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const bot = new Telegraf(BOT_TOKEN);
@@ -64,6 +65,34 @@ bot.on("location", (ctx) => {
   ctx.reply(
     `Teşekkürler! Konumun alındı ✅\nLat: ${location.latitude}, Lon: ${location.longitude}`
   );
+});
+
+//Product
+bot.action("PRODUCTS", async (ctx) => {
+  try {
+    // Ürünleri veritabanından çekiyoruz
+    const products = await Product.find();
+
+    if (products.length === 0) {
+      await ctx.reply("🚫 Şu anda sistemde hiç ürün bulunmamaktadır.");
+      return;
+    }
+    const productList = products
+      .map((product, index) => {
+        return `#${index + 1} ➡️ ${product.name} - ${product.price}₺`;
+      })
+      .join("$");
+
+    await ctx.reply(
+      `📋 **Ürün Listesi**: $$${productList}$$Daha fazla bilgi almak için bir ürün seçebilirsiniz.`
+    );
+  } catch (error) {
+    console.error("Ürünleri listelerken hata oluştu:", error);
+
+    await ctx.reply(
+      "⚠️ Ürünler şu anda yüklenemiyor. Lütfen biraz sonra tekrar deneyin."
+    );
+  }
 });
 
 // Export edilen sadece bot nesnesi

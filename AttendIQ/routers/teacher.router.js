@@ -7,18 +7,21 @@ const teacherValidation = require("../validations/teacher.validation");
 router.post(
   "/createTeacher",
   [teacherValidation.validateCreateTeacher()],
+  
   teacherController.createTeacher
 );
 
 router.put(
   "/updateTeacher/:teacherId",
   [teacherValidation.validateUpdateTeacher()],
+  
   teacherController.updateTeacher
 );
 
 router.delete(
   "/deleteTeacher/:teacherId",
   [teacherValidation.validateDeleteTeacher()],
+  
   teacherController.deleteTeacher
 );
 
@@ -30,6 +33,7 @@ router.get(
 router.get(
   "/getTeacherById/:teacherId",
   [teacherValidation.validateGetTeacherById()],
+ 
   teacherController.getTeacherById
 );
 

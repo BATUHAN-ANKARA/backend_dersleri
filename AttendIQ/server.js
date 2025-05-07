@@ -6,9 +6,9 @@ const app = express();
 app.use(express.json());
 
 app.use("/student", router.student);
-app.use("/attendance", router.attendance);
-app.use("/lecture", router.lecture);
 app.use("/teacher", router.teacher);
+app.use("/lecture", router.lecture);
+app.use("/attendance", router.attendance);
 
 configs.serverConfig.initialServerConfig();
 
