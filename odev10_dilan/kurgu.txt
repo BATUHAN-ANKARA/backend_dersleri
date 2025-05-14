@@ -1,0 +1,11 @@
+logger ve auth middleware olacak 
+zodiac, user, blog => servis controller router olacak
+günlük haftalık aylık ve yıllık burç yorumları,
+iki burcun uyumu, blog yazıları, kullanıcı kayıt giriş,
+blog, burç yorumunu veya burç uyumunu beğenme, validasyonlar mümkün oldukça kullanılacak
+tüm 12 burç içerde verisi bulunacak en az 4 kullanıcı kaydı olacak 
+şifrelerini değiştirme yapabilecekleri apileri ve updateuserinfo apisi muhakkak olacak
+readme ve açıklamalar zorunlu
+
+şifre değiştirme apisi 
+updateuserinfo apisi 
