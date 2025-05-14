@@ -3,7 +3,7 @@ const userService = require("./user.service");
 const zodiacService = require("./zodiac.service");
 
 module.exports = {
-  blogService,
-  userService,
-  zodiacService,
+  blog: blogService,
+  user: userService,
+  zodiac: zodiacService,
 };
