@@ -1,13 +1,5 @@
 const User = require("../models/user.model");
-
-/*
-create
-login
-changepassword
-delete 
-getall
-updateuserinfo
-*/
+const utils = require("../utils/index");
 exports.createUser = async (req) => {
   try {
     const { email, name, surname, password, birthDate, age, gender } = req.body;
@@ -16,16 +8,20 @@ exports.createUser = async (req) => {
       throw new Error("e-mail zaten kullanımda");
     }
     const _password = utils.helper.hashToPassword(password);
+    // bu satırdan sonra girilen doğum tarihi (birthDate) bilgisine göre kullanıcının zodiac bilgisini bul
     const user = new User({
       email,
       name,
       surname,
-      _password,
+      password: _password,
       birthDate,
       age,
       gender,
+      //zodiacSign: -buludğun zodiac bilgisi-
     });
     await user.save();
+    // utils.helper.createToken(user._id, name) token oluşturmak için bu satır aktif olmalı
+    // token oluşturma açtıysan return {user, token } böyle bir return olacak
     return user;
   } catch (error) {
     throw new Error(error);

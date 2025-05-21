@@ -10,7 +10,7 @@ update
 exports.createZodiac = async (req) => {
   try {
     const { title, daily, weekly, monthly } = req.body;
-
+    //12 tane burcun bilgilerini dbye kaydet
     const existingZodiac = await Zodiac.findOne({ title });
     if (existingZodiac) {
       throw new Error("Bu burç zaten kayıtlı.");
@@ -82,3 +82,6 @@ exports.deleteZodiac = async (req) => {
     throw new Error(error.message);
   }
 };
+
+//zodiac compatibility için create ve get apileri
+//ör: koç ve aslan uyumunu post meyhodu ile dbye işle sonra get methodu koç ve aslan uyumunu kullanıcıya göster

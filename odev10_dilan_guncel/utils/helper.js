@@ -23,7 +23,7 @@ exports.handleValidation = (req) => {
 
 exports.createToken = (userId, userName) => {
   const token = jsonwebtoken.sign({ userId, userName }, process.env.SECRETKEY, {
-    expiresIn: process.env.JWT_EXPORES,
+    expiresIn: process.env.JWT_EXPIRESIN,
     issuer: "localhost",
   });
   return token;
@@ -32,6 +32,7 @@ exports.createToken = (userId, userName) => {
 exports.verifyToken = (token) => {
   const isVerify = { decodedToken: null };
   try {
+    //burayı tamamlaman lazım
   } catch (error) {
     console.log("VerifyToken hatalı");
     throw new Error("Token validate sırasında hata oluştu");

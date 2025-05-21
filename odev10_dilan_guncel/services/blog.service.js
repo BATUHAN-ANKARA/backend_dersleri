@@ -64,7 +64,7 @@ exports.getAllBlogs = async () => {
 
 exports.getBlogById = async (req) => {
   try {
-    const { id } = req.param;
+    const { id } = req.params;
     const existBlog = await Blog.findById(id);
     if (!existBlog) {
       throw new Error("Blog bulunamadı");

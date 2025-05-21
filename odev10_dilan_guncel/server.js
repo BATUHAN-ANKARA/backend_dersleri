@@ -11,8 +11,9 @@ configs.serverConfig.initialServerConfig();
 
 const PORT = process.env.PORT || 5000;
 
-app.use(middlewares.loggerMiddleware);
-app.use(middlewares.authMiddleware);
+// app.use(middlewares.loggerMiddleware);
+//logger middleware içerisinde auth kodları var bunları logger ile değiştir
+// app.use(middlewares.authMiddleware);
 
 app.use("/zodiac", zodiacRouter);
 app.use("/user", userRouter);

@@ -42,7 +42,7 @@ exports.loginUser = async (req, res) => {
         ...isInvalid,
       });
     }
-    const json = await services.user.login(req);
+    const json = await services.user.loginUser(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
       code: StatusCodes.OK,
@@ -138,6 +138,29 @@ exports.updateUserInfo = async (req, res) => {
       code: StatusCodes.OK,
       data: json,
       message: "Kullanıcı bilgileri başarılı bir şekilde güncellendi.",
+      timestamp: new Date(),
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      error: true,
+      success: false,
+      message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};
+
+exports.getAllUser = async (req, res) => {
+  try {
+    const json = await services.user.getAllUser(req);
+    console.log("burda");
+    res.status(StatusCodes.OK).json({
+      ...baseResponse,
+      code: StatusCodes.OK,
+      data: json,
+      message: "Kullanıcı bilgileri başarılı bir şekilde getirildi.",
       timestamp: new Date(),
     });
   } catch (error) {
