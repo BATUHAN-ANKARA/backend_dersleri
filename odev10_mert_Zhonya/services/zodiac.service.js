@@ -16,7 +16,7 @@ exports.addHoroscope = async (req) => {
       daily: daily ? [{ title: "daily", text: daily, date: now }] : [],
       weekly: weekly ? [{ title: "weekly", text: weekly, date: now }] : [],
       monthly: monthly ? [{ title: "monthly", text: monthly, date: now }] : [],
-      yearly: yearly ? [{ title: "yearly", text: yearly, date: now }] : [],
+      yearly: yearly ? [{ title: "yearly", text: yearly, date: now }] : [], //date göndermesen de olur
     });
 
     return await newZodiac.save();
@@ -27,37 +27,42 @@ exports.addHoroscope = async (req) => {
 
 exports.updateHoroscope = async (req) => {
   try {
-    const { name, daily, weekly, monthly, yearly } = req.body;
+    const { id, daily, weekly, monthly, yearly } = req.body;
     const now = new Date();
 
-    const existing = await Zodiac.findOne({ name });
+    const existing = await Zodiac.findById(id);
     if (!existing) {
       throw new Error("Bu burç bulunamadı. Lütfen önce ekleyin.");
     }
-
-    const newDaily = daily ? [{ title: "daily", text: daily, date: now }] : [];
-    const newWeekly = weekly
-      ? [{ title: "weekly", text: weekly, date: now }]
-      : [];
-    const newMonthly = monthly
-      ? [{ title: "monthly", text: monthly, date: now }]
-      : [];
-    const newYearly = yearly
-      ? [{ title: "yearly", text: yearly, date: now }]
-      : [];
-
-    const updatedZodiac = await Zodiac.findOneAndUpdate(
-      { name },
-      {
-        $push: {
-          daily: { $each: newDaily },
-          weekly: { $each: newWeekly },
-          monthly: { $each: newMonthly },
-          yearly: { $each: newYearly },
-        },
-      },
+    const updatedZodiac = await Zodiac.findByIdAndUpdate(
+      id,
+      { daily, weekly, monthly, yearly },
       { new: true }
     );
+
+    // const newDaily = daily ? [{ title: "daily", text: daily, date: now }] : [];
+    // const newWeekly = weekly
+    //   ? [{ title: "weekly", text: weekly, date: now }]
+    //   : [];
+    // const newMonthly = monthly
+    //   ? [{ title: "monthly", text: monthly, date: now }]
+    //   : [];
+    // const newYearly = yearly
+    //   ? [{ title: "yearly", text: yearly, date: now }]
+    //   : [];
+
+    // const updatedZodiac = await Zodiac.findOneAndUpdate(
+    //   { name },
+    //   {
+    //     $push: {
+    //       daily: { $each: newDaily },
+    //       weekly: { $each: newWeekly },
+    //       monthly: { $each: newMonthly },
+    //       yearly: { $each: newYearly },
+    //     },
+    //   },
+    //   { new: true }
+    // );
 
     return updatedZodiac;
   } catch (error) {
@@ -104,3 +109,6 @@ exports.likeZodiac = async (req) => {
     throw new Error(error);
   }
 };
+
+//belirli bir burcun bilgisini görmek isterse kullanıcı?
+//ör: oğlak burcu günlük yorumunu gösteren api değil oğlak burcunun tüm datasını getiren api hazırlayın (oğlak değişken)

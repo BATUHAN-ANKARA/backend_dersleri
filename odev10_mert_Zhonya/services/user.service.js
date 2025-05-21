@@ -97,3 +97,6 @@ exports.changePassword = async (req) => {
     throw new Error(error);
   }
 };
+
+//userin beğendiklerini getiren apiler
+//ör: getLikedBlogs vs

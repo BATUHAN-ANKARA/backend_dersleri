@@ -1,11 +1,14 @@
 const Relationship = require("../models/relationship.model");
-const User = require("../models/user.model")
+const User = require("../models/user.model");
 
 exports.addRelationship = async (req) => {
   try {
     const { zodiacName, otherZodiacName, compatibilityText } = req.body;
 
-    const existing = await Relationship.findOne({ zodiacName, otherZodiacName });
+    const existing = await Relationship.findOne({
+      zodiacName,
+      otherZodiacName,
+    });
     if (existing) {
       throw new Error("Bu ilişki zaten mevcut. Lütfen güncelleyin.");
     }
@@ -45,6 +48,7 @@ exports.updateRelationship = async (req) => {
 exports.getAllRelationships = async () => {
   try {
     const relationships = await Relationship.find();
+    //oğlak ve diğer tüm burçların uyumları da eklensin lütfen
     return relationships;
   } catch (error) {
     throw new Error(error.message);
