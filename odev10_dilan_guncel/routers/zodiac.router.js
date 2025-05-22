@@ -7,12 +7,12 @@ router.get("/getAllZodiac", controller.zodiac.getAllZodiacs);
 router.get("/getZodiac/:id", controller.zodiac.getAllZodiacs);
 router.delete(
   "/deleteZodiac",
-  validation.zodiacValidator.validateDelete,
+ 
   controller.zodiac.deleteZodiac
 );
 router.put(
   "/updateZodiac",
-  validation.zodiacValidator.validateUpdate,
+
   controller.zodiac.updateZodiac
 );
 

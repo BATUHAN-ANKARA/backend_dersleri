@@ -1,124 +1,10 @@
-const { StatusCodes } = require("http-status-codes");
-const baseResponse = require("../dto/baseResponse.dto");
 const utils = require("../utils");
 const services = require("../services");
+const { StatusCodes } = require("http-status-codes");
+const baseResponse = require("../dto/baseResponse.dto");
 
-exports.createUser = async (req, res) => {
-  try {
-    const isInvalid = utils.helper.handleValidation(req);
-    if (isInvalid) {
-      res.status(StatusCodes.BAD_REQUEST).json({
-        ...baseResponse,
-        ...isInvalid,
-      });
-    }
-    const json = await services.user.createUser(req);
-    res.status(StatusCodes.CREATED).json({
-      ...baseResponse,
-      data: json,
-      error: false,
-      success: true,
-      timestamp: new Date(),
-      message: "Kayıt başarılı",
-    });
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      ...baseResponse,
-      error: true,
-      success: false,
-      message: error.message,
-      timestamp: new Date(),
-      code: StatusCodes.INTERNAL_SERVER_ERROR,
-    });
-  }
-};
-
-exports.loginUser = async (req, res) => {
-  try {
-    const isInvalid = utils.helper.handleValidation(req);
-    if (isInvalid) {
-      res.status(StatusCodes.BAD_REQUEST).json({
-        ...baseResponse,
-        ...isInvalid,
-      });
-    }
-    const json = await services.user.loginUser(req);
-    res.status(StatusCodes.OK).json({
-      ...baseResponse,
-      code: StatusCodes.OK,
-      data: json,
-      message: "Giriş başarılı",
-      timestamp: new Date(),
-    });
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      ...baseResponse,
-      message: error.message,
-      success: false,
-      error: true,
-      timestamp: new Date(),
-      code: StatusCodes.INTERNAL_SERVER_ERROR,
-    });
-  }
-};
-
-exports.changePassword = async (req, res) => {
-  try {
-    const isInvalid = utils.helper.handleValidation(req);
-    if (isInvalid) {
-      res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ ...baseResponse, ...isInvalid });
-    }
-    const json = await services.user.changePassword(req);
-    res.status(StatusCodes.OK).json({
-      ...baseResponse,
-      code: StatusCodes.OK,
-      data: json,
-      message: "Güncelleme başarılı",
-      timestamp: new Date(),
-    });
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      ...baseResponse,
-      success: false,
-      error: true,
-      message: error.message,
-      timestamp: new Date(),
-      code: StatusCodes.INTERNAL_SERVER_ERROR,
-    });
-  }
-};
-
-exports.deleteUser = async (req, res) => {
-  try {
-    const isInvalid = utils.helper.handleValidation(req);
-    if (isInvalid) {
-      res.status(StatusCodes.BAD_REQUEST).json({
-        ...baseResponse,
-        ...isInvalid,
-      });
-    }
-    const json = await services.user.deleteUser(req);
-    res.status(StatusCodes.OK).json({
-      ...baseResponse,
-      data: json,
-      error: false,
-      success: true,
-      timestamp: new Date(),
-    });
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      ...baseResponse,
-      error: true,
-      success: false,
-      timestamp: new Date(),
-      code: StatusCodes.INTERNAL_SERVER_ERROR,
-    });
-  }
-};
-
-exports.updateUserInfo = async (req, res) => {
+ 
+exports.createCompatibility = async (req, res) => {
   try {
     const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
@@ -131,14 +17,14 @@ exports.updateUserInfo = async (req, res) => {
       });
     }
 
-    const json = await services.user.updateUserInfo(req);
-
-    res.status(StatusCodes.OK).json({
+    const json = await services.compatibility.createCompatibility(req);
+    res.status(StatusCodes.CREATED).json({
       ...baseResponse,
-      code: StatusCodes.OK,
       data: json,
-      message: "Kullanıcı bilgileri başarılı bir şekilde güncellendi.",
+      error: false,
+      success: true,
       timestamp: new Date(),
+      message: "Uyumluluk kaydı oluşturuldu.",
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -152,16 +38,118 @@ exports.updateUserInfo = async (req, res) => {
   }
 };
 
-exports.getAllUser = async (req, res) => {
+exports.deleteCompatibilityById = async (req, res) => {
   try {
-    const json = await services.user.getAllUser(req);
-    console.log("burda");
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        ...baseResponse,
+        ...isInvalid,
+        error: true,
+        success: false,
+        code: StatusCodes.BAD_REQUEST,
+      });
+    }
+
+    const json = await services.compatibility.deleteCompatibilityById(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
-      code: StatusCodes.OK,
       data: json,
-      message: "Kullanıcı bilgileri başarılı bir şekilde getirildi.",
+      error: false,
+      success: true,
       timestamp: new Date(),
+      message: "Uyumluluk kaydı silindi.",
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      error: true,
+      success: false,
+      message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};
+
+exports.updateCompatibility = async (req, res) => {
+  try {
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        ...baseResponse,
+        ...isInvalid,
+        error: true,
+        success: false,
+        code: StatusCodes.BAD_REQUEST,
+      });
+    }
+
+    const json = await services.compatibility.updateCompatibility(req);
+    res.status(StatusCodes.OK).json({
+      ...baseResponse,
+      data: json,
+      error: false,
+      success: true,
+      timestamp: new Date(),
+      message: "Uyumluluk kaydı güncellendi.",
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      error: true,
+      success: false,
+      message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};
+
+exports.getAllCompatibility = async (req, res) => {
+  try {
+    const json = await services.compatibility.getAllCompatibility(req);
+    res.status(StatusCodes.OK).json({
+      ...baseResponse,
+      data: json,
+      error: false,
+      success: true,
+      timestamp: new Date(),
+      message: "Tüm uyumluluk kayıtları getirildi.",
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      error: true,
+      success: false,
+      message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};
+
+exports.getCompatibilityBetween = async (req, res) => {
+  try {
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        ...baseResponse,
+        ...isInvalid,
+        error: true,
+        success: false,
+        code: StatusCodes.BAD_REQUEST,
+      });
+    }
+
+    const json = await services.compatibility.getCompatibilityBetween(req);
+    res.status(StatusCodes.OK).json({
+      ...baseResponse,
+      data: json,
+      error: false,
+      success: true,
+      timestamp: new Date(),
+      message: "Uyumluluk kaydı getirildi.",
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

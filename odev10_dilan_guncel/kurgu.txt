@@ -9,3 +9,6 @@ readme ve açıklamalar zorunlu
 
 şifre değiştirme apisi 
 updateuserinfo apisi 
+
+//zodiac compatibility için create ve get apileri
+//ör: koç ve aslan uyumunu post meyhodu ile dbye işle sonra get methodu koç ve aslan uyumunu kullanıcıya göster

@@ -1,4 +1,7 @@
 const Blog = require("../models/blog.model");
+const utils = require("../utils/index");
+
+
 
 /*create
 delete
@@ -27,7 +30,7 @@ exports.createBlog = async (req, res) => {
 
 exports.deleteBlogById= async (req) => {
   try {
-    const { id } = req.param;
+    const { id } = req.params;
     const existBlog = await Blog.findById(id);
     if (!existBlog) {
       throw new Error("Blog bulunamadı");

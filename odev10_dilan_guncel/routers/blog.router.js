@@ -1,6 +1,6 @@
 const controller = require("../controllers/index");
 const router = require("express").Router();
-const validation = require("../validations/index");
+
 
 router.post("/createBlog", controller.blog.createBlog);
 router.delete("/deleteBlog", controller.blog.deleteBlog);
