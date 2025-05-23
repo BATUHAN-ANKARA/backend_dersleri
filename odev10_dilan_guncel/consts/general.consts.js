@@ -1,4 +1,4 @@
-const ROUTES = ["/user/login","/user/register"]
+const ROUTES = ["/user/loginUser","/user/createUser"]
 
 module.exports = {
     ROUTES

@@ -38,9 +38,9 @@ exports.createUser = async (req) => {
 
     await user.save();
 
-    // const token = utils.helper.createToken(user._id, user.name);
+    const token = utils.helper.createToken(user._id, user.name);
 
-    // return { user, token };
+    return { user, token };
   } catch (error) {
     throw new Error(error.message || error);
   }
@@ -54,7 +54,9 @@ exports.loginUser = async (req) => {
     if (!user) {
       throw new Error("Kullanıcı bilgileri yanlış");
     }
-    return user;
+    const token = utils.helper.createToken(user._id, user.name);
+
+    return { user, token };
   } catch (error) {
     throw new Error(error);
   }

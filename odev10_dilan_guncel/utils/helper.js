@@ -32,7 +32,7 @@ exports.createToken = (userId, userName) => {
 exports.verifyToken = (token) => {
   const isVerify = { decodedToken: null };
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jsonwebtoken.verify(token, process.env.SECRETKEY);
     isVerify.decodedToken = decoded;
     return isVerify;
   } catch (error) {
