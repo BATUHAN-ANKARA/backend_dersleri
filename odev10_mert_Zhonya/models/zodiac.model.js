@@ -10,7 +10,7 @@ const horoscopeSchema = new Schema(
       required: true,
     },
     text: { type: String },
-    date: { type: Date, default: Date.now }, //bu date formatı js time formatı oluyor bunun yerine new Date() kullanı
+    date: { type: Date, default: () => new Date() }, //bu date formatı js time formatı oluyor bunun yerine new Date() kullanın------ NEW DATE OLARAK DEĞİŞTİRİLDİ.
   },
   { _id: false }
 );

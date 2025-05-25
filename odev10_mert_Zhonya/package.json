@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon server.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +20,9 @@
     "md5": "^2.3.0",
     "mongoose": "^8.14.3",
     "multer": "^1.4.5-lts.2",
+    "node-telegram-bot-api": "^0.66.0",
     "nodemon": "^3.1.10",
+    "telegraf": "^4.16.3",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
   }

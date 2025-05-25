@@ -1,5 +1,7 @@
 const User = require("../models/user.model");
 const utils = require("../utils/index");
+const { notifyNewUser } = require("../services/telegram.service");
+const { notifyDeletedUser } = require ("../services/telegram.service")
 
 exports.register = async (req) => {
   try {
@@ -26,6 +28,10 @@ exports.register = async (req) => {
       zodiacSign: zodiacSign,
     });
     await user.save();
+    const totalUserCount = await User.countDocuments(); // Toplam kullanıcı sayısı
+
+await notifyNewUser(user, totalUserCount); // Telegram'a mesaj gönder
+
     const token = utils.helper.createToken(user._id, user.name);
     return { user, token };
   } catch (error) {
@@ -93,6 +99,23 @@ exports.changePassword = async (req) => {
     } else {
       throw new Error("Şifre yanlış");
     }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.deleteUser = async (userId) => {
+  try {
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      throw new Error("Kullanıcı bulunamadı");
+    }
+
+    const totalUserCount = await User.countDocuments();
+    await notifyDeletedUser(user, totalUserCount);
+
+    return user;
   } catch (error) {
     throw new Error(error);
   }

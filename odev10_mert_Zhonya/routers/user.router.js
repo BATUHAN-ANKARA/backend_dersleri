@@ -28,6 +28,9 @@ router.put(
   controller.user.changePassword
 );
 
+router.delete("/deleteUser/:id", controller.user.deleteUser);
+
+
 module.exports = {
     user: router,
   };
