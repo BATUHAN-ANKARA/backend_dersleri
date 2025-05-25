@@ -13,7 +13,7 @@ configs.serverConfig.initialServerConfig();
 const PORT = process.env.PORT || 3000;
 
 app.use(middlewares.loggerMiddleware);
-app.use(middlewares.authMiddleware);
+// app.use(middlewares.authMiddleware);
 
 app.use("/zodiac", zodiacRouter);
 app.use("/user", userRouter);

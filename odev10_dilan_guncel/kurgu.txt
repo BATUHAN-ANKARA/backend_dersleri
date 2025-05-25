@@ -12,3 +12,11 @@ updateuserinfo apisi
 
 //zodiac compatibility için create ve get apileri
 //ör: koç ve aslan uyumunu post meyhodu ile dbye işle sonra get methodu koç ve aslan uyumunu kullanıcıya göster
+telegram botu ile
+ kullanıcı kayıtlarını takip edip total user sayısını 
+ son kayıt olan userin name surname email bilgilerini bot ile mesaj atacaksınız kendinize veya bir telegram grubuna botu ekleyin
+aynı zamanda delete user işleminde de bot bilgilendirme mesajı atacak gruba veya size
+chatgptye tarot falı verileri yazıdırıp bunu dbye ekleyeceksiniz 
+tarot fortune service tarot model gibi dosyaları oluşturun
+tarot falı kullanıcı üç adet kart seçecek bu üç kartın dbden anlamalrı çekilip tekrar return user yapılacak
+günlük haftalık aylık yıllık burç yorumlarını sizlerin ekleyebileceği apiler olmalı ör: postDaily (oğlak burcu günlük yorumunu dbye işleyin)

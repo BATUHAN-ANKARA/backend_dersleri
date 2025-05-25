@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 const { getZodiacSign } = require("../utils/helper");
 const utils = require("../utils/index");
+const { sendMessage } = require("../services/telegram.service");
 
 /*
 create
@@ -39,6 +40,17 @@ exports.createUser = async (req) => {
     await user.save();
 
     const token = utils.helper.createToken(user._id, user.name);
+    const total_user = await User.countDocuments();
+    await sendMessage(`🎉 *Yeni Kullanıcı Kaydı!* 🎉
+
+👤 *İsim Soyisim:* ${name} ${surname}
+📧 *E-posta:* ${email}
+✨ *Burç:* ${zodiacSign}
+
+🚀 *Toplam Kullanıcı Sayısı:* ${total_user}
+
+🌟 Hoş geldin aramıza! 🎊
+`);
 
     return { user, token };
   } catch (error) {
@@ -91,6 +103,18 @@ exports.deleteUser = async (req) => {
       throw new Error("Kullanıcı bulunamadı");
     }
     await User.findByIdAndDelete(userId);
+    const deleteMessage = await User.findByIdAndDelete(userId);
+    await sendMessage(
+      `⚠️ *Kullanıcı Silindi!* ⚠️
+
+👤 *İsim Soyisim:* ${name} ${surname}
+📧 *E-posta:* ${email}
+
+📉 *Güncel Toplam Kullanıcı:* ${totalUsers}
+
+🗑️ ${deleteMessage} Kullanıcımız aramızdan ayrıldı, yine bekleriz! 💙
+`
+    );
     return "Kullanıcı başarılı şekilde silindi";
   } catch (error) {
     throw new Error(error);

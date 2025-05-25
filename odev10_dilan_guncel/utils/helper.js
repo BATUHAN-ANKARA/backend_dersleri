@@ -2,6 +2,7 @@ const md5 = require("md5");
 const { validationResult } = require("express-validator");
 const { StatusCodes } = require("http-status-codes");
 const jsonwebtoken = require("jsonwebtoken");
+require('dotenv').config();
 
 exports.hashToPassword = (password) => {
   return md5(password);
