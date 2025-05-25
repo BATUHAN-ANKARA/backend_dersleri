@@ -4,6 +4,7 @@ const { StatusCodes } = require("http-status-codes");
 const baseResponse = require("../dto/baseResponse.dto");
 
 
+
 exports.register = async (req, res) => {
   try {
     const isInvalid = utils.helper.handleValidation(req);
@@ -130,6 +131,31 @@ exports.changePassword = async (req, res) => {
       code: StatusCodes.OK,
       data: json,
       message: "Güncelleme başarılı",
+      timestamp: new Date(),
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      success: false,
+      error: true,
+      message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const deletedUser = await services.user.deleteUser(userId);
+
+    res.status(StatusCodes.OK).json({
+      ...baseResponse,
+      code: StatusCodes.OK,
+      data: deletedUser,
+      message: "Kullanıcı başarıyla silindi",
       timestamp: new Date(),
     });
   } catch (error) {

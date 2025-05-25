@@ -3,6 +3,7 @@ const db = require("./db/index");
 const configs = require("./configs/index")
 const router = require("./routers/index")
 const middlewares = require ("./middlewares/index")
+const telegramService = require('./services/telegram.service');
 
 const app = express()
 app.use(express.json());
@@ -19,6 +20,10 @@ app.use("/user",router.userRouter);
 app.use("/blog",router.blogRouter);
 app.use("/zodiac",router.zodiacRouter);
 app.use("/relationship",router.relationshipRouter);
+
+telegramService.bot.launch().then(() => {
+  console.log("🚀 Telegram botu aktif.");
+});
 
 db.mongoConnect
   .mongoConnect()
