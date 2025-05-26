@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 
 router.post("/createUser",  controller.user.createUser);
-router.delete("/deleteUser/:id",  controller.user.deleteUser);
+router.delete("/deleteUser/:userId",  controller.user.deleteUser);
 router.post("/loginUser", controller.user.loginUser);
 router.get("/getAllUser", controller.user.getAllUser);
 

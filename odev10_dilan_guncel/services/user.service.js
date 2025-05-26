@@ -99,20 +99,24 @@ exports.deleteUser = async (req) => {
   try {
     const { userId } = req.params;
     const user = await User.findById(userId);
+    
     if (!user) {
       throw new Error("Kullanıcı bulunamadı");
     }
+    console.log("Kullanıcı bulundu", user.name);
+
     await User.findByIdAndDelete(userId);
-    const deleteMessage = await User.findByIdAndDelete(userId);
+    const totalUsers = await User.countDocuments();
+
     await sendMessage(
       `⚠️ *Kullanıcı Silindi!* ⚠️
 
-👤 *İsim Soyisim:* ${name} ${surname}
-📧 *E-posta:* ${email}
+👤 *İsim Soyisim:* ${user.name} ${user.surname}
+📧 *E-posta:* ${user.email}
 
 📉 *Güncel Toplam Kullanıcı:* ${totalUsers}
 
-🗑️ ${deleteMessage} Kullanıcımız aramızdan ayrıldı, yine bekleriz! 💙
+🗑️Kullanıcımız aramızdan ayrıldı, yine bekleriz! 💙
 `
     );
     return "Kullanıcı başarılı şekilde silindi";
