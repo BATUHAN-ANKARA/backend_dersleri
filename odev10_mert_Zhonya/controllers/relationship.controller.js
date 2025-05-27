@@ -170,3 +170,31 @@ exports.likeRelationship = async (req, res) => {
     });
   }
 };
+
+exports.unLikeRelationship = async (req, res) => {
+  try {
+    const isInvalid = utils.helper.handleValidation(req);
+    if (isInvalid) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ ...baseResponse, ...isInvalid });
+    }
+    const json = await services.relationship.unLikeRelationship(req);
+    res.status(StatusCodes.CREATED).json({
+      ...baseResponse,
+      code: StatusCodes.CREATED,
+      data: json,
+      message: "İlişki durumu beğenisi kaldırıldı!",
+      timestamp: new Date(),
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      success: false,
+      error: true,
+      message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};

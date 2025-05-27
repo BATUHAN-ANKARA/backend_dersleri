@@ -14,6 +14,8 @@ router.get("/getAllBlogs", controller.blog.getAllBlogs);
 
 router.post("/likeBlog/:blogId/:userId", controller.blog.likeBlog);
 
+router.post("/unlikeBlog/:blogId/:userId", controller.blog.unlikeBlog)
+
 module.exports = {
   blog: router,
 };

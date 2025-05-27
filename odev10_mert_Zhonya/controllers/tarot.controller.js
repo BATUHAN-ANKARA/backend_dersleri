@@ -3,7 +3,7 @@ const utils = require("../utils/index");
 const { StatusCodes } = require("http-status-codes");
 const baseResponse = require("../dto/baseResponse.dto");
 
-exports.createBlog = async (req, res) => {
+exports.createTarotCard = async (req, res) => {
   try {
     const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
@@ -11,12 +11,12 @@ exports.createBlog = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ ...baseResponse, ...isInvalid });
     }
-    const json = await services.blog.createBlog(req);
+    const json = await services.tarot.createTarotCard(req);
     res.status(StatusCodes.CREATED).json({
       ...baseResponse,
       code: StatusCodes.CREATED,
       data: json,
-      message: "Blog ekleme başarılı",
+      message: "Tarot kartı ekleme başarılı",
       timestamp: new Date(),
     });
   } catch (error) {
@@ -31,7 +31,7 @@ exports.createBlog = async (req, res) => {
   }
 };
 
-exports.deleteBlog = async (req, res) => {
+exports.deleteTarotCard = async (req, res) => {
   try {
     const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
@@ -39,7 +39,7 @@ exports.deleteBlog = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ ...baseResponse, ...isInvalid });
     }
-    const json = await services.blog.deleteBlog(req);
+    const json = await services.tarot.deleteTarotCard(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
       code: StatusCodes.OK,
@@ -58,8 +58,7 @@ exports.deleteBlog = async (req, res) => {
     });
   }
 };
-
-exports.getAllBlogs = async (req, res) => {
+exports.getAllTarotCards = async (req, res) => {
   try {
     const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
@@ -67,7 +66,7 @@ exports.getAllBlogs = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ ...baseResponse, ...isInvalid });
     }
-    const json = await services.blog.getAllBlogs();
+    const json = await services.tarot.getAllTarotCards();
     res.status(StatusCodes.OK).json({
       ...baseResponse,
       code: StatusCodes.OK,
@@ -87,7 +86,7 @@ exports.getAllBlogs = async (req, res) => {
   }
 };
 
-exports.likeBlog = async (req, res) => {
+exports.getTarotFortune = async (req, res) => {
   try {
     const isInvalid = utils.helper.handleValidation(req);
     if (isInvalid) {
@@ -95,47 +94,19 @@ exports.likeBlog = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ ...baseResponse, ...isInvalid });
     }
-    const json = await services.blog.likeBlog(req);
+    const json = await services.tarot.getTarotFortune(req);
     res.status(StatusCodes.OK).json({
       ...baseResponse,
       code: StatusCodes.OK,
       data: json,
-      message: "Beğenme başarılı",
+      message: "Kartlar gösterildi",
       timestamp: new Date(),
     });
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       ...baseResponse,
-      error: true,
       success: false,
-      message: error.message,
-      timestamp: new Date(),
-      code: StatusCodes.INTERNAL_SERVER_ERROR,
-    });
-  }
-};
-
-exports.unlikeBlog = async (req, res) => {
-  try {
-    const isInvalid = utils.helper.handleValidation(req);
-    if (isInvalid) {
-      res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ ...baseResponse, ...isInvalid });
-    }
-    const json = await services.blog.unlikeBlog(req);
-    res.status(StatusCodes.OK).json({
-      ...baseResponse,
-      code: StatusCodes.OK,
-      data: json,
-      message: "Beğenme kaldırıldı",
-      timestamp: new Date(),
-    });
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      ...baseResponse,
       error: true,
-      success: false,
       message: error.message,
       timestamp: new Date(),
       code: StatusCodes.INTERNAL_SERVER_ERROR,

@@ -28,7 +28,12 @@ router.put(
   controller.user.changePassword
 );
 
-router.delete("/deleteUser/:id", controller.user.deleteUser);
+router.delete("/deleteUser/:userId", controller.user.deleteUser);
+
+router.post("/userLikedBlog/:userId",controller.user.userLikedBlog)
+router.post("/userLikedZodiac/:userId",controller.user.userLikedZodiac)
+router.post("/userLikeRelationship/:userId",controller.user.userLikeRelationship)
+
 
 
 module.exports = {

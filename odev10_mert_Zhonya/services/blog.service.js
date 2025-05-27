@@ -92,4 +92,30 @@ exports.likeBlog = async (req) => {
   }
 };
 
-//unlikeblog apisi lazım
+exports.unlikeBlog = async (req) => {
+  try {
+    const { blogId, userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("Kullanıcı bulunamadı!");
+    }
+    const blog = await Blog.findById(blogId);
+    if (!blog) {
+      throw new Error("Blog bulunamadı!");
+    }
+    const isUnliked = user.likedBlogs.includes(blogId);
+    if (!isUnliked) {
+      throw new Error("Blog beğenilmedi!");
+    }
+    const updated = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { unlikeBlog: blogId } },
+      { new: true }
+    );
+    return updated;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+//unlikeblog apisi lazım = YAPILDI!

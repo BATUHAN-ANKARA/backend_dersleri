@@ -1,7 +1,10 @@
 const User = require("../models/user.model");
 const utils = require("../utils/index");
+const Blog = require("../models/blog.model");
+const Zodiac = require("../models/zodiac.model");
+const Relationship = require("../models/relationship.model");
 const { notifyNewUser } = require("../services/telegram.service");
-const { notifyDeletedUser } = require ("../services/telegram.service")
+const { notifyDeletedUser } = require("../services/telegram.service");
 
 exports.register = async (req) => {
   try {
@@ -30,7 +33,7 @@ exports.register = async (req) => {
     await user.save();
     const totalUserCount = await User.countDocuments(); // Toplam kullanıcı sayısı
 
-await notifyNewUser(user, totalUserCount); // Telegram'a mesaj gönder
+    await notifyNewUser(user, totalUserCount); // Telegram'a mesaj gönder
 
     const token = utils.helper.createToken(user._id, user.name);
     return { user, token };
@@ -104,8 +107,9 @@ exports.changePassword = async (req) => {
   }
 };
 
-exports.deleteUser = async (userId) => {
+exports.deleteUser = async (req) => {
   try {
+    const { userId } = req.params;
     const user = await User.findByIdAndDelete(userId);
 
     if (!user) {
@@ -121,5 +125,49 @@ exports.deleteUser = async (userId) => {
   }
 };
 
-//userin beğendiklerini getiren apiler
-//ör: getLikedBlogs vs
+exports.userLikedBlog = async (req) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("Kullanıcı bulunamadı");
+    }
+    const blog = await Blog.find({ _id: { $in: user.likedBlogs } });
+    return blog;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.userLikedZodiac = async (req) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("Kullanıcı bulunamadı!");
+    }
+    const zodiac = await Zodiac.find({ _id: { $in: user.likedZodiacs } });
+    return zodiac;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.userLikeRelationship = async (req) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("Kullanıcı bulunamadı!");
+    }
+    const relationship = await Relationship.find({
+      _id: { $in: user.relationship },
+    });
+    return relationship;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+//userin beğendiklerini getiren apiler = YAPILDI!
+//ör: getLikedBlogs vs =YAPILDI!

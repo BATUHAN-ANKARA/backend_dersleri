@@ -110,3 +110,35 @@ exports.likeRelationship = async (req) => {
     throw new Error(error);
   }
 };
+
+
+exports.unLikeRelationship = async (req) => {
+  try {
+    const { relationshipId, userId } = req.params;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("Kullanıcı bulunamadı");
+    }
+
+    const relationship = await Relationship.findById(relationshipId);
+    if (!relationship) {
+      throw new Error("ilişki uyumu bulunamadı");
+    }
+
+    const isLiked = user.likedRelationships.includes(relationshipId)
+    if (!isLiked) {
+      throw new Error("Bu ilişki uyumu zaten beğenilmemiş!");
+    }
+
+    await User.findByIdAndUpdate(
+      userId,
+      { $pull: { likedRelationships: relationshipId } },
+      { new: true }
+    );
+
+    return "Relationship beğenisi kaldırıldı!";
+  } catch (error) {
+    throw new Error(error);
+  }
+};

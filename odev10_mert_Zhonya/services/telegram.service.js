@@ -5,12 +5,6 @@ const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const ADMIN_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID;
 const bot = new Telegraf(BOT_TOKEN);
 
-
-/**
- * Yeni kullanıcı kayıt olduğunda admin’e bildirim atar.
- * @param {Object} user Yeni kaydolan kullanıcı objesi
- * @param {number} totalUserCount Toplam kullanıcı sayısı
- */
 async function notifyNewUser(user, totalUserCount) {
   const message = `
 🟢 Yeni kullanıcı kaydı:
@@ -27,12 +21,6 @@ async function notifyNewUser(user, totalUserCount) {
   }
 }
 
-
-/**
- * Kullanıcı silindiğinde admin’e bildirim atar.
- * @param {Object} user Silinen kullanıcı objesi
- * @param {number} totalUserCount Güncel toplam kullanıcı sayısı
- */
 async function notifyDeletedUser(user, totalUserCount) {
   const message = `
 🔴 Kullanıcı silindi:
@@ -47,9 +35,6 @@ async function notifyDeletedUser(user, totalUserCount) {
     console.error("Telegram mesaj gönderme hatası:", error);
   }
 }
-
-
-
 
 bot.start((ctx) => {
   ctx.reply(
@@ -180,6 +165,7 @@ bot.on("location", (ctx) => {
 });
 
 module.exports = {
-  bot,notifyNewUser,
+  bot,
+  notifyNewUser,
   notifyDeletedUser,
 };
