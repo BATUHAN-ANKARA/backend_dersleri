@@ -1,3 +1,4 @@
+const fileService = require("./file.service");
 const User = require("../models/user.model");
 const utils = require("../utils/index");
 const Blog = require("../models/blog.model");
@@ -169,5 +170,25 @@ exports.userLikeRelationship = async (req) => {
   }
 };
 
+exports.uploadProfilePhoto = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const user = await User.findById(userId);
+    if (!user) throw new Error("Kullanıcı bulunamadı");
+
+    const imageUrl = await fileService.uploadImage(req, res);
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { profilePicture: imageUrl },
+      { new: true }
+    );
+
+    return updatedUser;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 //userin beğendiklerini getiren apiler = YAPILDI!
 //ör: getLikedBlogs vs =YAPILDI!

@@ -59,6 +59,7 @@ const userSchema = new Schema(
         ref: "Relationship"
       }
     ],
+    profilePicture: { type: String, default: null }
   },
   { timestamps: true, autoIndex: true, minimize: true }
 );
