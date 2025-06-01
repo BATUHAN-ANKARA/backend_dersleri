@@ -34,16 +34,15 @@ exports.verifyToken = (token) => {
   const isVerify = { decodedToken: null };
   try {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    return isVerify.decodedToken = decodedToken;
+    return (isVerify.decodedToken = decodedToken);
   } catch (error) {
     console.log("helperde hata oldu verify tokende");
     throw new Error("Token validate sırasında hata oluştu");
   }
 };
 
-
-exports.zodiacSign =(day,month)=>{
-   switch (month) {
+exports.zodiacSign = (day, month) => {
+  switch (month) {
     case 1:
       return day <= 19 ? "Oğlak" : "Kova";
     case 2:
@@ -72,4 +71,8 @@ exports.zodiacSign =(day,month)=>{
     default:
       return "Geçersiz Tarih";
   }
-}
+};
+
+exports.getHost = async () => {
+  return process.env.HOST || "http://localhost:3000";
+};

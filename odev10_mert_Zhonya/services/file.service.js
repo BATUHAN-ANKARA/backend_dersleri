@@ -1,4 +1,4 @@
-const imageMiddleware = require("../middlewares/singleImage.middleware");
+const imageMiddleware = require("../middlewares/image.middleware");
 const utils = require("../utils/helper");
 
 exports.uploadImage = (req, res) => {

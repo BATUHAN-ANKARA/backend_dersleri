@@ -251,3 +251,26 @@ exports.userLikeRelationship = async (req, res) => {
     });
   }
 };
+
+exports.uploadProfilePhoto = async (req, res) => {
+  try {
+    const json = await services.user.uploadProfilePhoto(req, res);
+
+    res.status(StatusCodes.OK).json({
+      ...baseResponse,
+      code: StatusCodes.OK,
+      data: json,
+      message: "Profil fotoğrafı başarıyla yüklendi",
+      timestamp: new Date(),
+    });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      ...baseResponse,
+      success: false,
+      error: true,
+      message: error.message,
+      timestamp: new Date(),
+      code: StatusCodes.INTERNAL_SERVER_ERROR,
+    });
+  }
+};
