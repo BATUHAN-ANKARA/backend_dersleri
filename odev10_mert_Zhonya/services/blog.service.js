@@ -118,4 +118,3 @@ exports.unlikeBlog = async (req) => {
   }
 };
 
-//unlikeblog apisi lazım = YAPILDI!

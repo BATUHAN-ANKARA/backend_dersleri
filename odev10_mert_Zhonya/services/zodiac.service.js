@@ -139,5 +139,3 @@ exports.getZodiacByName = async (req) => {
   }
 };
 
-//belirli bir burcun bilgisini görmek isterse kullanıcı?
-//ör: oğlak burcu günlük yorumunu gösteren api değil oğlak burcunun tüm datasını getiren api hazırlayın (oğlak değişken)

@@ -7,29 +7,31 @@ const blogsSchema = new Schema(
     title: {
       type: String,
       required: true,
-      trim:true,
+      trim: true,
     },
     text: {
       type: String,
       required: false,
-      default:"",
-    },     
-     author: {
+      default: "",
+    },
+    backgroundImage: { type: String, trim: true },
+
+    author: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
     comments: [
-  {
-    user: { type: Schema.Types.ObjectId, ref: "User" },
-    text: { type: String, required: true },
-    date: { type: Date, default: Date.now }
-  }
-]
+      {
+        user: { type: Schema.Types.ObjectId, ref: "User" },
+        text: { type: String, required: true },
+        date: { type: Date, default: Date.now },
+      },
+    ],
   },
   {
     minimize: true,
     timestamps: true,
-    autoIndex: true
+    autoIndex: true,
   }
 );
 

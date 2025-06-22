@@ -190,5 +190,3 @@ exports.uploadProfilePhoto = async (req, res) => {
     throw new Error(error);
   }
 };
-//userin beğendiklerini getiren apiler = YAPILDI!
-//ör: getLikedBlogs vs =YAPILDI!
